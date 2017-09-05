@@ -1,6 +1,14 @@
 package com.sbz.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +23,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.sbz.dto.LoginDTO;
 import com.sbz.dto.RegisterDTO;
 import com.sbz.dto.ResponseDTO;
+import com.sbz.models.Category;
+import com.sbz.models.Customer;
 import com.sbz.models.User;
+import com.sbz.services.CategoryService;
 import com.sbz.services.UserService;
 
 @RestController
@@ -24,6 +35,11 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private CategoryService categoryService;
+
+	HttpServletRequest request;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDTO) throws IllegalArgumentException, UnsupportedEncodingException {
@@ -48,7 +64,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<ResponseDTO> register(@RequestBody RegisterDTO registerDTO) throws IllegalArgumentException, UnsupportedEncodingException {
+	public ResponseEntity<ResponseDTO> register(@RequestBody RegisterDTO registerDTO) throws IllegalArgumentException, IOException {
 		
 		User user = service.findOneByUsername(registerDTO.getUsername());
 		
@@ -57,6 +73,18 @@ public class UserController {
 				new ResponseDTO("Username already exist!"),HttpStatus.BAD_REQUEST);
 		}
 		
+		Category category = categoryService.findOneByName("BRONZE");
+
+		user = new Customer(registerDTO.getUsername(), registerDTO.getPassword(), registerDTO.getFname(),
+				registerDTO.getLname(), registerDTO.getAddress(), category);
+		service.save(user);
+		
+		
+		String str = registerDTO.getImage();
+		
+		byte[] imagedata = DatatypeConverter.parseBase64Binary(str.substring(str.indexOf(",") + 1));
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagedata));
+		ImageIO.write(bufferedImage, "png", new File("static/images/users/"+ registerDTO.getUsername() + ".png"));
 		
 		return new ResponseEntity<ResponseDTO>(
 				new ResponseDTO(),HttpStatus.OK);

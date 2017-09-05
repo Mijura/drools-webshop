@@ -2,7 +2,7 @@
 	// controller bound to application body, parent controller to all others
 	angular.module("myApp").controller('registerController', registerController);
 	
-	function registerController($scope, $timeout, toastr) {
+	function registerController($scope, $timeout, $http, $window, toastr) {
 		var vm = this;
 		vm.image = "images/user.png";
 		var reader = new FileReader();
@@ -17,7 +17,7 @@
 				"username": vm.username, 
 				"password": vm.password,
 				"fname": vm.fname,
-				"lname": vm.lanme,
+				"lname": vm.lname,
 				"address": vm.address,
 				"image": vm.image
 			};

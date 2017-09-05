@@ -16,10 +16,10 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String firstName;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String lastName;
 	
 	@Column(nullable = false)
@@ -27,14 +27,13 @@ public class User {
 	
 	public User(){}
 
-	public User(String username, String password, String firstName, String lastName,  
-			 Date registered) {
+	public User(String username, String password, String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
-		this.registered = registered;
+		this.registered = new Date();
 	}
 
 	public String getFirstName() {

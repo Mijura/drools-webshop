@@ -21,4 +21,8 @@ public class UserService {
 	public User findOneByUsername(String username) {
 		return repository.findOneByUsername(username);
 	}
+
+	public void save(User user) {
+		repository.save(user);
+	}
 }

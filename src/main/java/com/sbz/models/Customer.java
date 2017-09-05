@@ -24,18 +24,18 @@ public class Customer extends User {
 	private Category category;
 	
 	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Receipt> receipts = new ArrayList<Receipt>();
+	private List<Receipt> receipts;
 
 	public Customer(){
 		super();
 	}
 
-	public Customer(String address, int points, Category category, ArrayList<Receipt> receipt) {
-		super();
+	public Customer(String username, String password, String firstName, String lastName, String address, Category category) {
+		super(username, password, firstName, lastName);
 		this.address = address;
-		this.points = points;
+		this.points = 0;
 		this.category = category;
-		this.receipts = receipt;
+		this.receipts = new ArrayList<Receipt>();
 	}
 
 	public String getAddress() {

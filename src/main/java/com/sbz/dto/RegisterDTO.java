@@ -3,7 +3,7 @@ package com.sbz.dto;
 public class RegisterDTO {
 	
 	private String username;
-	private String pasword;
+	private String password;
 	private String fname;
 	private String lname;
 	private String address;
@@ -19,12 +19,12 @@ public class RegisterDTO {
 		this.username = username;
 	}
 
-	public String getPasword() {
-		return pasword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasword(String pasword) {
-		this.pasword = pasword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFname() {

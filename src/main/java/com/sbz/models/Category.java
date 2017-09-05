@@ -18,15 +18,15 @@ public class Category {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(nullable = false)
-	private Name name;
+	@Column
+	private String name;
 	
 	@OneToMany
 	private List<SpendingLimit> limits;
 
 	public Category(){}
 
-	public Category(Long id, Name name, ArrayList<SpendingLimit> limits) {
+	public Category(Long id, String name, ArrayList<SpendingLimit> limits) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,11 +41,11 @@ public class Category {
 		this.id = id;
 	}
 
-	public Name getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Name name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	

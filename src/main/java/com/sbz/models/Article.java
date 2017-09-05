@@ -40,13 +40,10 @@ public class Article {
 	@Column(nullable = false)
 	private Status status;
 	
-	@Column(nullable = false)
-	private String picture;
-	
 	public Article(){}
 
 	public Article(Long id, String name, ArticleCategory category, double price, int count, Date created,
-			boolean ordered, int minCount, Status status, String picture) {
+			boolean ordered, int minCount, Status status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -57,7 +54,6 @@ public class Article {
 		this.ordered = ordered;
 		this.minCount = minCount;
 		this.status = status;
-		this.picture = picture;
 	}
 
 	public Long getId() {
@@ -130,14 +126,6 @@ public class Article {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 	
 	
