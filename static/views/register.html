@@ -5,36 +5,36 @@
       <div class="login_form">
 		
 		<div class="form_row">
-		  <div style="float:left" > <img id="image" src="images/user.png" width="122" height="125" border="0" alt="" /> </div>
-		  <input style="float:left" type="file" id="file" accept="image/*" onchange="uploadFile()"/>
+		  <div style="float:left" > <img id="image" ng-src="{{registerCtrl.image}}" width="122" height="125" border="0" alt="" /> </div>
+		  <input style="float:left" type="file" accept="image/*" id="fileInput"/>
 		</div>
 		
 		<div class="form_row" >
-          <label class="contact" ><strong>Username:</strong></label>
-          <input type="text" class="text_input" />
+          <label class="contact" ><strong>Username</strong></label>
+          <input type="text" class="text_input" ng-model="registerCtrl.username" />
         </div>
         
 		<div class="form_row">
-          <label class="contact"><strong>Password:</strong></label>
-          <input type="text" class="text_input" />
+          <label class="contact"><strong>Password</strong></label>
+          <input type="password" class="text_input" ng-model="registerCtrl.password" />
         </div>
 			
 		<div class="form_row">
-          <label class="contact"><strong>First Name:</strong></label>
-          <input type="text" class="text_input" />
+          <label class="contact"><strong>First Name</strong></label>
+          <input type="text" class="text_input" ng-model="registerCtrl.fname" />
         </div>
 			
 		<div class="form_row">
-          <label class="contact"><strong>Last Name:</strong></label>
-          <input type="text" class="text_input" />
+          <label class="contact"><strong>Last Name</strong></label>
+          <input type="text" class="text_input" ng-model="registerCtrl.lname"/>
         </div>
 			
 		<div class="form_row">
-          <label class="contact"><strong>Address:</strong></label>
-          <input type="text" class="text_input" />
+          <label class="contact"><strong>Address</strong></label>
+          <input type="text" class="text_input" accept="image/*" ng-model="registerCtrl.address" id="fileInput"/>
         </div>
 			
-        <div class="form_row"> <a href="#" class="prod_details">Register</a> </div>
+        <div class="form_row"> <a href="" ng-click="registerCtrl.register()" class="prod_details">Register</a> </div>
 	
       </div>
     </div>

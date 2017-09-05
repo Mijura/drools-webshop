@@ -26,22 +26,22 @@
             <div class="top_right">
                <div class="languages">
                   <div class="lang_text">Languages:</div>
-                  <a href="#" class="lang"><img src="images/en.gif" alt="" border="0" /></a> 
+                  <a href="" class="lang"><img src="images/en.gif" alt="" border="0" /></a> 
                </div>
                <div class="big_banner"> <a href="#"><img src="images/banner728.jpg" alt="" border="0" /></a> </div>
             </div>
-            <div id="logo"> <a href="#"><img src="images/logo.png" alt="" border="0" width="85" height="85" /></a> </div>
+            <div id="logo"> <a ng-href="{{indexCtrl.homepage}}"><img src="images/logo.png" alt="" border="0" width="85" height="85" /></a> </div>
          </div>
          <div id="main_content">
             <div id="menu_tab">
                <ul class="menu">
                   <li ng-show="!indexCtrl.loggedIn"><a href="#!/register" class="nav">Register</a></li>
-                  <li ng-show="!indexCtrl.loggedIn" class="divider"></li>
-                  <li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
+                  <!--  <li ng-show="!indexCtrl.loggedIn" class="divider"></li>
+                  --><li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
                </ul>
             </div>
            
-            <div class="left_content">&nbsp;
+            <div class="left_content">
                <div ng-show="indexCtrl.loggedIn">
                <div class="title_box">Search</div>
                <div class="border_box">
@@ -66,10 +66,12 @@
                </div>
                <div class="banner_adds"> <a href="#"><img src="images/bann1.jpg" alt="" border="0" /></a> </div>
                </div>
+               &nbsp;
             </div>
             <!-- end of left content -->
             <div class="center_content">
                <ng-view></ng-view>
+               &nbsp;
             </div>
 
             <div class="right_content" ng-show="indexCtrl.loggedIn">
@@ -99,7 +101,7 @@
                   <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
                </div>
             </div>
-           
+           &nbsp;
             <!-- end of right content -->
          </div>
          <!-- end of main content -->

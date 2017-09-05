@@ -7,6 +7,11 @@
 		
 		vm.login = function(){
 			
+			if(!vm.username || !vm.password){
+				toastr.error("Enter all fields!");
+				return ;
+			}
+				
 			var userData =  { "username": vm.username, "password": vm.password };
 	        
 			$http.post('/api/users/login', userData).then(function(response) {

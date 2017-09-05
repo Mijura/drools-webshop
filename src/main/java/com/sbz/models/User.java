@@ -4,14 +4,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class User {
+	
 	@Id
-	@GeneratedValue
-	private Long id;
+	@Column(nullable = false, unique = true)
+	private String username;
+	
+	@Column(nullable = false)
+	private String password;
 	
 	@Column(nullable = true)
 	private String firstName;
@@ -19,38 +22,19 @@ public class User {
 	@Column(nullable = true)
 	private String lastName;
 	
-	@Column(nullable = false, unique = true)
-	private String username;
-	
-	@Column(nullable = false)
-	private String password;
-	
 	@Column(nullable = false)
 	private Date registered;
 	
-	@Column(nullable = false)
-	private String role;
-	
 	public User(){}
 
-	public User(Long id, String firstName, String lastName, String username, String password, Date registered,
-			String role) {
+	public User(String username, String password, String firstName, String lastName,  
+			 Date registered) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
 		this.registered = registered;
-		this.role = role;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -91,14 +75,6 @@ public class User {
 
 	public void setRegistered(Date registered) {
 		this.registered = registered;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 	
 }

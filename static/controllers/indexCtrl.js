@@ -5,25 +5,31 @@
 	function indexController($cookies, toastr) {
 		var vm = this;
 		vm.loggedIn = false;
+		vm.homepage = '#!/';
 		isLogged();
 		
 		function isLogged() {
 			if($cookies.get("userdata") != undefined){
 				vm.loggedIn = true;
+				vm.homepage = '#!/home';
 				vm.userData = $cookies.getObject("userdata");
+				
 			}
 		}
 		
 		vm.login = function(token){
 			vm.loggedIn = true;
+			vm.homepage = '#!/home';
 			vm.userData = parseJwt(token);
 			vm.role = vm.userData.iss;
 			$cookies.putObject('userdata', vm.userData);
 			$cookies.put('token', token);
+			
 		}
 		
 		vm.logout = function() {
 			vm.loggedIn = false;
+			vm.homepage = '#!/';
 			toastr.success(vm.userData.username + " godbye.");
 			vm.userData = undefined;
 			var cookies = $cookies.getAll();

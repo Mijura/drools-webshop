@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-
 import com.sbz.dto.LoginDTO;
+import com.sbz.dto.RegisterDTO;
 import com.sbz.dto.ResponseDTO;
 import com.sbz.models.User;
 import com.sbz.services.UserService;
@@ -37,15 +37,29 @@ public class UserController {
 		
 		Algorithm algorithm = Algorithm.HMAC256("sbz");
 	    String token = JWT.create()
-	        .withIssuer(user.getRole())
 	        .withClaim("username", user.getUsername())
 	        .withClaim("fname", user.getFirstName())
 	        .withClaim("lname", user.getLastName())
 	        .withClaim("registered", user.getRegistered())
-	        .withClaim("role", user.getRole())
 	        .sign(algorithm);
 		return new ResponseEntity<ResponseDTO>(
 				new ResponseDTO(token),HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public ResponseEntity<ResponseDTO> register(@RequestBody RegisterDTO registerDTO) throws IllegalArgumentException, UnsupportedEncodingException {
+		
+		User user = service.findOneByUsername(registerDTO.getUsername());
+		
+		if(user!=null){
+			return new ResponseEntity<ResponseDTO>(
+				new ResponseDTO("Username already exist!"),HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		return new ResponseEntity<ResponseDTO>(
+				new ResponseDTO(),HttpStatus.OK);
 		
 	}
 }

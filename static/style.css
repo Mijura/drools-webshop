@@ -108,7 +108,7 @@ color:#0fa0dd;
 
 /*-------------left_content------------------*/
 .left_content{
-min-width:20%;
+width:180px;
 float:left;
 padding:0 0 0 5px;
 }
@@ -245,7 +245,7 @@ line-height:15px;
 }
 /*center content--------------------------*/
 .center_content{
-width:60%;
+width:600px;
 float:left;
 padding:5px 10px 5px 15px;
 }
@@ -264,7 +264,7 @@ background:url(images/bar_bg.gif) no-repeat center;
 
 /*----------------------right content--------------*/
 .right_content{
-width:20%;
+width:180px;
 float:left;
 padding:0px;
 }
