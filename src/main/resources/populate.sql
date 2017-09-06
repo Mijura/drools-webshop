@@ -41,5 +41,14 @@ INSERT INTO article_category VALUES ('category 8', '12', 'Home Appliances', 'cat
 INSERT INTO article_category VALUES ('category 9', '25', 'Audio and TV', 'category 2');
 INSERT INTO article_category VALUES ('category 10', '15', 'Computers', 'category 2');
 
+INSERT INTO sale (`id`, `name`, `discount`, `from_date`, `to_date`) VALUES ('sale 1', 'New Year', 30, '2017-12-20 00:00:00', '2018-01-30 00:00:00');
+INSERT INTO sale (`id`, `name`, `discount`, `from_date`, `to_date`) VALUES ('sale 2', '1. May', 40, '2017-04-30 00:00:00', '2017-05-01 00:00:00');
+INSERT INTO sale (`id`, `name`, `discount`, `from_date`, `to_date`) VALUES ('sale 3', 'Summer',  20, '2017-06-20 00:00:00', '2018-08-21 00:00:00');
 
-
+INSERT INTO sale_article_categories values ('sale 1', 'category 2');
+INSERT INTO sale_article_categories values ('sale 2', 'category 1');
+INSERT INTO sale_article_categories values ('sale 2', 'category 10');
+INSERT INTO sale_article_categories values ('sale 3', 'category 7');
+INSERT INTO sale_article_categories values ('sale 3', 'category 3');
+INSERT INTO sale_article_categories values ('sale 3', 'category 4');
+INSERT INTO sale_article_categories values ('sale 3', 'category 1');

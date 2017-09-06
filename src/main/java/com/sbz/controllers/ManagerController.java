@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sbz.jwt.JWTVerify;
 import com.sbz.models.ArticleCategory;
 import com.sbz.models.Category;
+import com.sbz.models.Sale;
 import com.sbz.models.SpendingLimit;
 import com.sbz.services.ArticleCategoryService;
 import com.sbz.services.CategoryService;
+import com.sbz.services.SaleService;
 import com.sbz.services.SpendingLimitService;
 
 @RestController
@@ -30,6 +32,9 @@ public class ManagerController {
 	private ArticleCategoryService articleCategoryService;
 	
 	@Autowired
+	private SaleService saleService;
+	
+	@Autowired
 	private SpendingLimitService sLService;
 	
 	@RequestMapping(value = "/getCategories", method = RequestMethod.POST, produces = "application/json")
@@ -40,6 +45,18 @@ public class ManagerController {
 			return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<List<Category>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/getSales", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<Sale>> getSales(@CookieValue("token") String token) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			List<Sale> sales = saleService.findAll();
+			return new ResponseEntity<List<Sale>>(sales, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<Sale>>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}
@@ -82,6 +99,23 @@ public class ManagerController {
 			return new ResponseEntity<List<ArticleCategory>>(categories, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<List<ArticleCategory>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/addSale", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<Sale>> addSale(@CookieValue("token") String token, @RequestBody Sale sale) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			Sale ac = saleService.findOne(sale.getId());
+			if(ac!=null)
+				return new ResponseEntity<List<Sale>>(HttpStatus.OK);
+			
+			saleService.save(sale);
+			List<Sale> sales = saleService.findAll();
+			return new ResponseEntity<List<Sale>>(sales, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<Sale>>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}

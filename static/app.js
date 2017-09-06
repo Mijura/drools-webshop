@@ -1,5 +1,5 @@
 angular.module('myApp',
-		[ 'ngResource', 'ngRoute','ngCookies', 'toastr'])
+		[ 'ngResource', 'ngRoute','ngCookies', 'toastr','moment-picker'])
 		.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider
 			.when('/', {

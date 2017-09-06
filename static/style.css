@@ -518,6 +518,18 @@ color:#999999;
 border:1px #DFDFDF solid;
 float:left;
 }
+select.text_view{
+	width:150px;
+	color:black;
+	height:18px;
+	background-color:#fff;
+	border:1px #DFDFDF solid;
+	float:left;
+}
+
+select.text_view:hover{
+	border:1px solid red;
+}
 textarea.contact_textarea{
 width:253px;
 height:100px;

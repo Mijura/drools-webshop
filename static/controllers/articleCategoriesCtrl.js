@@ -83,7 +83,7 @@
 					vm.newCategory = false; vm.newId=''; vm.newName=''; vm.newMaxDiscount='';
 					toastr.success("Article category is successfully added!");
 				}else{
-					toastr.success("Already exist article category with entered ID!");
+					toastr.error("Already exist article category with entered ID!");
 				}
 			}, function(response) {
 				toastr.error("Access Denied!");

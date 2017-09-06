@@ -1,1 +1,137 @@
+<div >
 <div class="center_title_bar">Sale</div>
+<br><br>
+<div id="admin_header">
+      <div class="admin_index_title">Manage Sale</div>
+      <div class="right_buttons" style="padding-top:10px;">
+        <div class="right_button" ><a href="" ng-click="saleCtrl.newSale=true;saleCtrl.edit = null;">Add new sale</a></div>
+      </div>
+</div>
+<div  class="prod_box_big">
+<div ng-show="saleCtrl.edit" class="login_form" style="height:auto;margin-bottom:30px;">
+      <div class="cart_title">Edit Sale No. {{saleCtrl.index+1}}</div>
+      <br>
+        <div class="form_row">
+          <label class="contact"><strong>ID</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.edit.id" disabled/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Name</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.edit.name"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>From</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.edit.fromDate"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>To</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.edit.toDate"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Discount</strong></label>
+          <input type="number" class="text_input" ng-model="saleCtrl.edit.discount"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Apply on categories</strong></label>
+          <ul style="height: 100px; overflow: auto">
+			<li ng-repeat="s in saleCtrl.edit.articleCategories">
+				<input type="checkbox" ng-checked="all">{{s.id}}&nbsp;({{s.name}})<br>
+			</li>
+		  </ul>
+        </div>
+        <div class="form_row"> <a href="" ng-click="saleCtrl.editArticleCategory()" class="prod_details">Edit</a> </div>
+ </div>
+ <div ng-show="saleCtrl.newSale" class="login_form" style="height:auto;margin-bottom:30px;">
+      <div class="cart_title">Add New Sale</div>
+      <br>
+      
+      	<!-- Id -->
+        <div class="form_row">
+          <label class="contact"><strong>ID</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.newId"/>
+        </div>
+        
+        <!-- Name -->
+        <div class="form_row">
+          <label class="contact"><strong>Name</strong></label>
+          <input type="text" class="text_input" ng-model="saleCtrl.newName"/>
+        </div>
+        
+        <!-- From date -->
+        <div class="form_row">
+          <label class="contact"><strong>From</strong></label>
+          <div class="input-group"
+     		moment-picker="saleCtrl.newFromDate"
+     		format="MM/DD/YYYY">
+    				
+    		<input class="text_input"
+           		placeholder="Select a date"
+           		ng-model="saleCtrl.newFromDate"
+           		ng-model-options="{ updateOn: 'blur' }">
+		  </div>
+        </div>
+        
+        <!-- To date -->
+        <div class="form_row">
+          <label class="contact"><strong>To</strong></label>
+          <div class="input-group"
+     		moment-picker="saleCtrl.newToDate"
+     		format="MM/DD/YYYY">
+    				
+    		<input class="text_input"
+           		placeholder="Select a date"
+           		ng-model="saleCtrl.newToDate"
+           		ng-model-options="{ updateOn: 'blur' }">
+		  </div>
+        </div>
+        
+        <!-- Discount -->
+        <div class="form_row">
+          <label class="contact"><strong>Discount</strong></label>
+          <input type="number" class="text_input" ng-model="saleCtrl.newDiscount"/>
+        </div>
+        
+        <!-- Article categories on this sale-->
+        <div class="form_row">
+          <label class="contact"><strong>Apply on categories</strong></label>
+          <ul class="text_input" style="height: 100px; margin-top:0px; margin-bottom:0px; padding-left:0px; overflow: auto; border:1px solid #DFDFDF;">
+			<li ng-repeat="(a,enabled) in saleCtrl.ac" style="list-style:none; float:left;">
+				<input type="checkbox" ng-model="saleCtrl.ac[a]">{{a}}&nbsp;({{saleCtrl.temp[a].name}})<br>
+			</li>
+		  </ul>	
+        </div>
+        
+        <!-- add button -->
+        <div class="form_row" > <a href="" ng-click="saleCtrl.addSale()" class="prod_details">Add</a> </div>
+ </div>
+   <div class="center_prod_box_big">
+      <div class="table_grid" ng-show="saleCtrl.view==1">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">No.</a></th>
+               <th style="width:auto;"><a href="" class="pink">ID</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Name</a></th>
+			   <th style="width:auto;"><a href="" class="pink">From</a></th>
+			   <th style="width:auto;"><a href="" class="pink">To</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+               <th style="width:auto;"><a href="" class="pink">Applied on Categories</a></th>
+               <th style="width:22px;"><a href="" class="pink">Edit</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in saleCtrl.sales">
+               <td>{{$index+1}}</td>
+               <td>{{x.id}}</td>
+               <td>{{x.name}}</td>
+               <td><label ng-bind="saleCtrl.formatDate(x.fromDate) |  date:'MM/dd/yyyy'"></label></td>
+               <td><label ng-bind="saleCtrl.formatDate(x.toDate) |  date:'MM/dd/yyyy'"></label></td>
+			   <td>{{x.discount}}%</td>
+			   <td><select ng-model="s" class="text_view" 
+			   ng-options="ac.name for ac in x.articleCategories"
+			   ng-init="s= x.articleCategories[0]"></select></td>
+               <td><a href="" ng-click="saleCtrl.setEditCategory($index)"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
+            </tr>
+            
+         </table>
+      </div>
+     </div>
+</div>
+</div>

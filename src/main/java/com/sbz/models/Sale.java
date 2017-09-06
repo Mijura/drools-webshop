@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -15,8 +14,7 @@ import javax.persistence.ManyToMany;
 public class Sale {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	private String id;
 	
 	@Column(nullable = false)
 	private String name;
@@ -35,7 +33,7 @@ public class Sale {
 
 	public Sale(){}
 	
-	public Sale(Long id, String name, Date fromDate, Date toDate, int discount,
+	public Sale(String id, String name, Date fromDate, Date toDate, int discount,
 			List<ArticleCategory> articleCategories) {
 		super();
 		this.id = id;
@@ -46,11 +44,11 @@ public class Sale {
 		this.articleCategories = articleCategories;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
