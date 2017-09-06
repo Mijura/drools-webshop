@@ -86,6 +86,19 @@ public class ManagerController {
 		
 	}
 	
+	@RequestMapping(value = "/editSale", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<Sale>> editSale(@CookieValue("token") String token, @RequestBody Sale sale) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			saleService.save(sale);
+			List<Sale> sales = saleService.findAll();
+			return new ResponseEntity<List<Sale>>(sales, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<Sale>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	@RequestMapping(value = "/addArticleCategories", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<List<ArticleCategory>> addArticleCategories(@CookieValue("token") String token, @RequestBody ArticleCategory articleCategory) {
 		

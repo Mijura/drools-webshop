@@ -44,6 +44,19 @@
 			vm.newSale=false;
 			vm.index = i;
 			vm.edit = JSON.parse(JSON.stringify(vm.sales[i]));
+			vm.edit.fromDate = moment(vm.edit.fromDate).format('MM-DD-YYYY');
+			vm.edit.toDate = moment(vm.edit.toDate).format('MM-DD-YYYY');
+			
+			Object.keys(vm.ac).forEach(function(key) {
+			    vm.ac[key]=false;
+			});
+			
+			vm.edit.articleCategories.forEach(function(y){
+				vm.ac[y.id]=true;
+			
+			});
+				
+			
 		}
 		
 		vm.formatDate = function(date){
@@ -51,23 +64,35 @@
 	          return dateOut;
 	    };
 	    
-		vm.editArticleCategory = function(){
+		vm.editSale = function(){
 			
-			if(vm.superCategory)
-				vm.categories.forEach(function(x) {
-					if(x.id==vm.superCategory){
-						vm.edit.superCategory = x;
-					}
-				});
-			else
-				vm.edit.superCategory=null;
-				
-			$http.post('/api/manager/editArticleCategories', vm.edit).then(function(response) {
+			if(!vm.edit.id || !vm.edit.name || !vm.edit.fromDate || !vm.edit.toDate || !vm.edit.discount){
+				toastr.error("All fields (except categories) must be filled!");
+				return ;
+			}
+			
+			var articleCategories = [];
+			Object.keys(vm.ac).forEach(function(key) {
+			    value = vm.ac[key];
+			    if(value)
+					articleCategories.push(vm.temp[key])
+			});
+			
+			data={"id":vm.edit.id, "name": vm.edit.name, "fromDate": new Date(vm.edit.fromDate), 
+					"toDate": new Date(vm.edit.toDate), 
+					"discount": vm.edit.discount, "articleCategories":articleCategories}
+			
+			$http.post('/api/manager/editSale', data).then(function(response) {
 				
 				if(response.data){
-					vm.categories = response.data;
 					vm.edit = null;
-					toastr.success("Article category is successfully changed!");
+					vm.sales = response.data; 
+					
+					Object.keys(vm.ac).forEach(function(key) {
+					    vm.ac[key]=false;
+					});
+					
+					toastr.success("Sale is successfully changed!");
 				}
 			}, function(response) {
 				toastr.error("Access Denied!");
