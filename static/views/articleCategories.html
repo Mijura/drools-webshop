@@ -4,7 +4,7 @@
 <div id="admin_header">
       <div class="admin_index_title">Manage Categories</div>
       <div class="right_buttons" style="padding-top:10px;">
-        <div class="right_button" ><a href="#">Add new category</a></div>
+        <div class="right_button" ><a href="" ng-click="articleCategoriesCtrl.newCategory=true;articleCategoriesCtrl.edit = null;">Add new category</a></div>
       </div>
 </div>
 <div  class="prod_box_big">
@@ -32,7 +32,33 @@
           </select>
           
         </div>
-        <div class="form_row"> <a href="" ng-click="articleCategoriesCtrl.editCustomerCategory()" class="prod_details">Edit</a> </div>
+        <div class="form_row"> <a href="" ng-click="articleCategoriesCtrl.editArticleCategory()" class="prod_details">Edit</a> </div>
+ </div>
+ <div ng-show="articleCategoriesCtrl.newCategory" class="login_form" style="height:auto;margin-bottom:30px;">
+      <div class="cart_title">Add Article Category </div>
+      <br>
+        <div class="form_row">
+          <label class="contact"><strong>ID</strong></label>
+          <input type="text" class="text_input" ng-model="articleCategoriesCtrl.newId"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Name</strong></label>
+          <input type="text" class="text_input" ng-model="articleCategoriesCtrl.newName"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Max Discount</strong></label>
+          <input type="number" class="text_input" ng-model="articleCategoriesCtrl.newMaxDiscount"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Super Category</strong></label>
+          
+          <select class="text_input" 
+            ng-model="articleCategoriesCtrl.newSuperCategory"
+          	ng-options="c.id for c in articleCategoriesCtrl.categories">
+          </select>
+          
+        </div>
+        <div class="form_row"> <a href="" ng-click="articleCategoriesCtrl.addArticleCategory()" class="prod_details">Add</a> </div>
  </div>
    <div class="center_prod_box_big">
       <div class="table_grid" ng-show="articleCategoriesCtrl.view==1">

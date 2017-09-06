@@ -24,6 +24,7 @@
 		});	
 		
 		vm.setEditCategory = function(i){
+			vm.newCategory=false;
 			vm.index = i;
 			vm.edit = JSON.parse(JSON.stringify(vm.categories[i]));
 
@@ -41,7 +42,7 @@
 		
 		}
 		
-		vm.editCustomerCategory = function(){
+		vm.editArticleCategory = function(){
 			
 			if(vm.superCategory)
 				vm.categories.forEach(function(x) {
@@ -63,6 +64,32 @@
 				toastr.error("Access Denied!");
 			});	
 		}
+		
+		vm.addArticleCategory = function(){
+			if(!vm.newId || !vm.newName || !vm.newMaxDiscount){
+				toastr.error("All fields except Super Category must be filled!");
+				return ;
+			}
+			
+			if(vm.newSuperCategory==undefined)
+				vm.newSuperCategory=null;
+			
+			data={"id":vm.newId, "name": vm.newName, "maxDiscount": vm.newMaxDiscount, "superCategory": vm.newSuperCategory}
+			
+			$http.post('/api/manager/addArticleCategories', data).then(function(response) {
+				
+				if(response.data){
+					vm.categories = response.data;
+					vm.newCategory = false; vm.newId=''; vm.newName=''; vm.newMaxDiscount='';
+					toastr.success("Article category is successfully added!");
+				}else{
+					toastr.success("Already exist article category with entered ID!");
+				}
+			}, function(response) {
+				toastr.error("Access Denied!");
+			});	
+
+		};
 		
 	}
     

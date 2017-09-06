@@ -6,5 +6,7 @@ import com.sbz.models.ArticleCategory;
 
 public interface ArticleCategoryRepository extends JpaRepository<ArticleCategory, String>{
 
+	ArticleCategory findOneById(String id);
+
 	
 }

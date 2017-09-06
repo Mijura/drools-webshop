@@ -21,4 +21,8 @@ public class ArticleCategoryService {
 	public void save(ArticleCategory articleCategory) {
 		repository.save(articleCategory);
 	}
+
+	public ArticleCategory findOneById(String id) {
+		return repository.findOneById(id);
+	}
 }

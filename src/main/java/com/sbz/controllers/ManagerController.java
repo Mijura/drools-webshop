@@ -69,6 +69,23 @@ public class ManagerController {
 		
 	}
 	
+	@RequestMapping(value = "/addArticleCategories", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<ArticleCategory>> addArticleCategories(@CookieValue("token") String token, @RequestBody ArticleCategory articleCategory) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			ArticleCategory ac = articleCategoryService.findOneById(articleCategory.getId());
+			if(ac!=null)
+				return new ResponseEntity<List<ArticleCategory>>(HttpStatus.OK);
+			
+			articleCategoryService.save(articleCategory);
+			List<ArticleCategory> categories = articleCategoryService.findAll();
+			return new ResponseEntity<List<ArticleCategory>>(categories, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<ArticleCategory>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	@RequestMapping(value = "/changeCustomerCategories", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Boolean> changeCustomerCategories(@CookieValue("token") String token, @RequestBody List<SpendingLimit> limits ) {
 		
