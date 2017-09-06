@@ -2,7 +2,6 @@ package com.sbz.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -10,8 +9,7 @@ import javax.persistence.ManyToOne;
 public class ArticleCategory {
 	
 	@Id
-	@GeneratedValue
-	private Long id;
+	private String id;
 	
 	@Column(nullable = false)
 	private String name;
@@ -24,7 +22,7 @@ public class ArticleCategory {
 	
 	public ArticleCategory(){}
 
-	public ArticleCategory(Long id, String name, int maxDiscount, ArticleCategory superCategory) {
+	public ArticleCategory(String id, String name, int maxDiscount, ArticleCategory superCategory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,11 +30,11 @@ public class ArticleCategory {
 		this.superCategory = superCategory;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

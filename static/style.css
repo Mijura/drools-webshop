@@ -150,7 +150,6 @@ color:#000; text-decoration:underline;
 width:180px;
 height:auto;
 text-align:center;
-background:url(images/box_bottom_bg.gif) no-repeat center bottom;
 }
 .product_title{
 color:#ff8a00;
@@ -504,6 +503,14 @@ padding:4px 5px 0 0;
 color:#159dcc;
 }
 input.text_input{
+width:253px;
+height:18px;
+background-color:#fff;
+color:#999999;
+border:1px #DFDFDF solid;
+float:left;
+}
+select.text_input{
 width:253px;
 height:18px;
 background-color:#fff;

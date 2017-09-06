@@ -1,7 +1,7 @@
 <div ng-show="customerCategoriesCtrl.view==1">
 <div class="center_title_bar">Customer Categories</div>
 <div class="prod_box_big">
-	<select ng-model="customerCategoriesCtrl.selectedCategory" 
+	Choose category &nbsp;<select ng-model="customerCategoriesCtrl.selectedCategory" 
 		ng-options="c.name for c in customerCategoriesCtrl.categories"
 		ng-change="customerCategoriesCtrl.showCategory()">
      </select>
@@ -9,33 +9,13 @@
 
 <div ng-if="customerCategoriesCtrl.selectedCategory">
 <div id="admin_header">
-      <div class="admin_index_title">Manage Categories</div>
-    </div>
-<div class="prod_box_big">
-   <div class="center_prod_box_big">
-      <div class="table_grid">
-         <table cellspacing="0" cellpadding="0">
-            <tr>
-               <th style="width:auto;"><a href="" class="pink">No.</a></th>
-			   <th style="width:auto;"><a href="" class="pink">From</a></th>
-               <th style="width:auto;"><a href="" class="pink">To</a></th>
-               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
-               <th style="width:22px;"><a href="" class="pink">Edit</a></th>
-            </tr>
-            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in customerCategoriesCtrl.limits">
-               <td>{{$index+1}}</td>
-               <td>{{x.fromLimit}}</td>
-			   <td>{{x.toLimit}}</td>
-               <td>{{x.priceToPoints}}%</td>
-               <td><a href="" ng-click="customerCategoriesCtrl.setEditCategory($index)"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
-            </tr>
-            
-         </table>
-      </div>
+	<div class="admin_index_title">Manage Categories</div>
+</div>
+
       
-     
-      <div ng-show="customerCategoriesCtrl.edit" class="login_form">
-      <br><br>
+<div class="prod_box_big">
+
+<div ng-show="customerCategoriesCtrl.edit" class="login_form" style="height:auto;margin-bottom:30px;">
       <div class="cart_title">Edit Category No. {{customerCategoriesCtrl.index+1}}</div>
       <br>
         <div class="form_row">
@@ -51,6 +31,28 @@
           <input type="number" class="text_input" ng-model="customerCategoriesCtrl.edit.priceToPoints"/>
         </div>
         <div class="form_row"> <a href="" ng-click="customerCategoriesCtrl.editCustomerCategory()" class="prod_details">Edit</a> </div>
+ </div>
+   <div class="center_prod_box_big">
+      <div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:auto;"><a href="" class="pink">No.</a></th>
+               <th style="width:22px;"><a href="" class="pink">ID</a></th>
+			   <th style="width:auto;"><a href="" class="pink">From</a></th>
+               <th style="width:auto;"><a href="" class="pink">To</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+               <th style="width:22px;"><a href="" class="pink">Edit</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in customerCategoriesCtrl.limits">
+               <td>{{$index+1}}</td>
+               <td>{{x.id}}</td>
+               <td>{{x.fromLimit}}</td>
+			   <td>{{x.toLimit}}</td>
+               <td>{{x.priceToPoints}}%</td>
+               <td><a href="" ng-click="customerCategoriesCtrl.setEditCategory($index)"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
+            </tr>
+            
+         </table>
       </div>
     
      </div>

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbz.jwt.JWTVerify;
+import com.sbz.models.ArticleCategory;
 import com.sbz.models.Category;
 import com.sbz.models.SpendingLimit;
+import com.sbz.services.ArticleCategoryService;
 import com.sbz.services.CategoryService;
 import com.sbz.services.SpendingLimitService;
 
@@ -23,6 +25,9 @@ public class ManagerController {
 	
 	@Autowired
 	private CategoryService service;
+	
+	@Autowired
+	private ArticleCategoryService articleCategoryService;
 	
 	@Autowired
 	private SpendingLimitService sLService;
@@ -35,6 +40,31 @@ public class ManagerController {
 			return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<List<Category>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/getArticleCategories", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<ArticleCategory>> getArticleCategories(@CookieValue("token") String token) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			List<ArticleCategory> categories = articleCategoryService.findAll();
+			return new ResponseEntity<List<ArticleCategory>>(categories, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<ArticleCategory>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/editArticleCategories", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<ArticleCategory>> editArticleCategories(@CookieValue("token") String token, @RequestBody ArticleCategory articleCategory) {
+		
+		if (JWTVerify.verify(token, "manager")){
+			articleCategoryService.save(articleCategory);
+			List<ArticleCategory> categories = articleCategoryService.findAll();
+			return new ResponseEntity<List<ArticleCategory>>(categories, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<ArticleCategory>>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}

@@ -20,6 +20,16 @@ angular.module('myApp',
 				controller : "customerCategoriesController",
 				controllerAs : "customerCategoriesCtrl"
 			})
+			.when('/articleCategories', {
+				templateUrl : 'views/articleCategories.html',
+				controller : "articleCategoriesController",
+				controllerAs : "articleCategoriesCtrl"
+			})
+			.when('/sale', {
+				templateUrl : 'views/sale.html',
+				controller : "saleController",
+				controllerAs : "saleCtrl"
+			})
 			.otherwise({
 				redirectTo : '/'
 			});

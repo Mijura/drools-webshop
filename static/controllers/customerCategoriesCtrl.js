@@ -32,8 +32,6 @@
 		vm.setEditCategory = function(i){
 			vm.index = i;
 			vm.edit = JSON.parse(JSON.stringify(vm.limits[i]));
-			vm.edit.fromLimit = Number(vm.edit.fromLimit);
-			vm.edit.toLimit = Number(vm.edit.toLimit);
 			
 			if(vm.index==0){
 				vm.min=0;
@@ -50,10 +48,7 @@
 			}else{
 				vm.max=vm.limits[vm.index+1].toLimit;
 				vm.maxDiscount = vm.limits[vm.index+1].priceToPoints;
-			}
-				
-			
-			 
+			} 
 		}
 		
 		vm.editCustomerCategory = function(){

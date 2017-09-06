@@ -1,0 +1,62 @@
+<div >
+<div class="center_title_bar">Article Categories</div>
+<br><br>
+<div id="admin_header">
+      <div class="admin_index_title">Manage Categories</div>
+      <div class="right_buttons" style="padding-top:10px;">
+        <div class="right_button" ><a href="#">Add new category</a></div>
+      </div>
+</div>
+<div  class="prod_box_big">
+<div ng-show="articleCategoriesCtrl.edit" class="login_form" style="height:auto;margin-bottom:30px;">
+      <div class="cart_title">Edit Category No. {{articleCategoriesCtrl.index+1}}</div>
+      <br>
+        <div class="form_row">
+          <label class="contact"><strong>ID</strong></label>
+          <input type="text" class="text_input" ng-model="articleCategoriesCtrl.edit.id" disabled/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Name</strong></label>
+          <input type="text" class="text_input" ng-model="articleCategoriesCtrl.edit.name"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Max Discount</strong></label>
+          <input type="number" class="text_input" ng-model="articleCategoriesCtrl.edit.maxDiscount"/>
+        </div>
+        <div class="form_row">
+          <label class="contact"><strong>Super Category</strong></label>
+          
+          <select class="text_input" 
+            ng-model="articleCategoriesCtrl.superCategory"
+          	ng-options="c for c in articleCategoriesCtrl.superCategories">
+          </select>
+          
+        </div>
+        <div class="form_row"> <a href="" ng-click="articleCategoriesCtrl.editCustomerCategory()" class="prod_details">Edit</a> </div>
+ </div>
+   <div class="center_prod_box_big">
+      <div class="table_grid" ng-show="articleCategoriesCtrl.view==1">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">No.</a></th>
+               <th style="width:auto;"><a href="" class="pink">ID</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Max Discount</a></th>
+               <th style="width:auto;"><a href="" class="pink">Super Category</a></th>
+               <th style="width:22px;"><a href="" class="pink">Edit</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in articleCategoriesCtrl.categories">
+               <td>{{$index+1}}</td>
+               <td>{{x.id}}</td>
+               <td>{{x.name}}</td>
+			   <td>{{x.maxDiscount}}%</td>
+			   <td ng-if="!x.superCategory">Undefined</td>
+               <td ng-if="x.superCategory">{{x.superCategory.name}}</td>
+               <td><a href="" ng-click="articleCategoriesCtrl.setEditCategory($index)"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
+            </tr>
+            
+         </table>
+      </div>
+     </div>
+</div>
+</div>
