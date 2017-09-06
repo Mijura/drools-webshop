@@ -565,3 +565,38 @@ text-align:center;
 color:#666666;
 padding:10px 0 0 60px;
 }
+
+.right_buttons{
+float:right;
+padding-right:20px;
+}
+.right_button{
+width:104px;
+height:26px;
+float:left;
+padding-left:10px;
+background:url(images/button_bg.gif) no-repeat center;
+text-align:center;
+line-height:26px;
+}
+.right_button a{
+font-size:10px;
+color:#D8325D;
+text-decoration:none;
+}
+.right_button a:hover{
+font-size:10px;
+color: #640064;
+text-decoration:none;
+}
+.admin_index_title{
+float:left;
+width: auto;
+height: auto;
+background:url(images/settings.png) no-repeat left;
+padding:5px 5px 5px 35px;
+font-size:14px;
+font-weight:bold;
+color:#445865;
+margin:10px;
+}

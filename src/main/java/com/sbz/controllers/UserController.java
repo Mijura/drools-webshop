@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,8 @@ import com.sbz.dto.RegisterDTO;
 import com.sbz.dto.ResponseDTO;
 import com.sbz.models.Category;
 import com.sbz.models.Customer;
+import com.sbz.models.Manager;
+import com.sbz.models.Salesman;
 import com.sbz.models.User;
 import com.sbz.services.CategoryService;
 import com.sbz.services.UserService;
@@ -38,8 +39,6 @@ public class UserController {
 	
 	@Autowired
 	private CategoryService categoryService;
-
-	HttpServletRequest request;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDTO) throws IllegalArgumentException, UnsupportedEncodingException {
@@ -52,17 +51,32 @@ public class UserController {
 		}
 		
 		Algorithm algorithm = Algorithm.HMAC256("sbz");
-	    String token = JWT.create()
-	        .withClaim("username", user.getUsername())
-	        .withClaim("fname", user.getFirstName())
-	        .withClaim("lname", user.getLastName())
-	        .withClaim("registered", user.getRegistered())
-	        .sign(algorithm);
+		String token=null;
+		if(user instanceof Customer){
+			token = createToken(algorithm, user, "customer");
+		}else if(user instanceof Manager){
+			token = createToken(algorithm, user, "manager");
+		}else if(user instanceof Salesman){
+			token = createToken(algorithm, user, "salesman");
+		}
+	     
 		return new ResponseEntity<ResponseDTO>(
 				new ResponseDTO(token),HttpStatus.OK);
 		
 	}
 	
+	private String createToken(Algorithm algorithm, User user, String role) {
+	
+		String token = JWT.create()
+		        .withClaim("username", user.getUsername())
+		        .withClaim("fname", user.getFirstName())
+		        .withClaim("lname", user.getLastName())
+		        .withClaim("registered", user.getRegistered())
+		        .withClaim("role", role)
+		        .sign(algorithm);
+		return token;
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<ResponseDTO> register(@RequestBody RegisterDTO registerDTO) throws IllegalArgumentException, IOException {
 		

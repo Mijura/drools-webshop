@@ -38,12 +38,12 @@ public class Article {
 	private int minCount;
 	
 	@Column(nullable = false)
-	private Status status;
+	private String status;
 	
 	public Article(){}
 
 	public Article(Long id, String name, ArticleCategory category, double price, int count, Date created,
-			boolean ordered, int minCount, Status status) {
+			boolean ordered, int minCount, String status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,11 +120,11 @@ public class Article {
 		this.minCount = minCount;
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

@@ -24,11 +24,11 @@ public class ReceiptDiscount {
 	private int discount;
 	
 	@Column(nullable = false)
-	Type type;
+	String type;
 
 	public ReceiptDiscount(){}
 	
-	public ReceiptDiscount(Long id, Receipt receiptDisc, int discount, Type type) {
+	public ReceiptDiscount(Long id, Receipt receiptDisc, int discount, String type) {
 		super();
 		this.id = id;
 		this.receiptDisc = receiptDisc;
@@ -60,11 +60,11 @@ public class ReceiptDiscount {
 		this.discount = discount;
 	}
 
-	public Type getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	

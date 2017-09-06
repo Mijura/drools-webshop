@@ -15,6 +15,11 @@ angular.module('myApp',
 			.when('/home', {
 				templateUrl : 'views/home.html'
 			})
+			.when('/customerCategories', {
+				templateUrl : 'views/customerCategories.html',
+				controller : "customerCategoriesController",
+				controllerAs : "customerCategoriesCtrl"
+			})
 			.otherwise({
 				redirectTo : '/'
 			});

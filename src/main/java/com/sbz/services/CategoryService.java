@@ -1,5 +1,7 @@
 package com.sbz.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class CategoryService {
 
 	public Category findOneByName(String name) {
 		return repository.findOneByName(name);
+	}
+
+	public List<Category> findAll() {
+		return repository.findAll();
 	}
 
 }

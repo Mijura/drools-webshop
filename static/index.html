@@ -19,6 +19,7 @@
       <script src="controllers/indexCtrl.js"></script>
       <script src="controllers/loginCtrl.js"></script>
       <script src="controllers/registerCtrl.js"></script>
+      <script src="controllers/customerCategoriesCtrl.js"></script>
    </head>
    <body ng-app="myApp" ng-controller="indexController as indexCtrl">
       <div id="main_container">
@@ -36,8 +37,11 @@
             <div id="menu_tab">
                <ul class="menu">
                   <li ng-show="!indexCtrl.loggedIn"><a href="#!/register" class="nav">Register</a></li>
-                  <!--  <li ng-show="!indexCtrl.loggedIn" class="divider"></li>
-                  --><li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
+                  <li ng-show="indexCtrl.loggedIn"><a href="#!/profile" class="nav">Profile</a></li>
+                  <li ng-show="indexCtrl.loggedIn" class="divider"></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/customerCategories" class="nav">Customer Categories</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'" class="divider"></li>
+                  <li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
                </ul>
             </div>
            

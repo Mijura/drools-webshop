@@ -24,11 +24,11 @@ public class ItemDiscount {
 	private int discount;
 	
 	@Column(nullable = false)
-	Type type;
+	String type;
 
 	public ItemDiscount(){}
 	
-	public ItemDiscount(Long id, Item item, int discount, Type type) {
+	public ItemDiscount(Long id, Item item, int discount, String type) {
 		super();
 		this.id = id;
 		this.item = item;
@@ -60,11 +60,11 @@ public class ItemDiscount {
 		this.discount = discount;
 	}
 
-	public Type getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	

@@ -38,7 +38,7 @@ public class Receipt {
 	private int spentPoints;
 	
 	@Column(nullable = false)
-	private State state;
+	private String state;
 	
 	@OneToMany(mappedBy="receipt", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Item> items;
@@ -49,7 +49,7 @@ public class Receipt {
 	public Receipt(){}
 
 	public Receipt(Long id, Date date, Customer customer, double totalPrice, double finalPrice, int earnedPoints, int spentPoints,
-			State state, List<Item> items, List<ReceiptDiscount> discounts) {
+			String state, List<Item> items, List<ReceiptDiscount> discounts) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -119,11 +119,11 @@ public class Receipt {
 		this.spentPoints = spentPoints;
 	}
 
-	public State getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 

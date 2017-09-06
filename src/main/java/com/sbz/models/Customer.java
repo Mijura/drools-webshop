@@ -14,10 +14,10 @@ import javax.persistence.OneToMany;
 public class Customer extends User {
 
 	
-	@Column(nullable = false)
+	@Column
 	private String address;
 	
-	@Column(nullable = false)
+	@Column
 	private int points;
 	
 	@ManyToOne
