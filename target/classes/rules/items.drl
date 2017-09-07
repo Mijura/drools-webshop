@@ -23,3 +23,12 @@ rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategori
 		System.out.println("osnovni popust 5%");
 		$i.getItemDiscounts().add(new ItemDiscount($i, 5, "BASE"));		
 end
+
+rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i njen artikal pripada sirokoj potrosnji"
+	when
+		$r: Receipt($items: items)
+		$i: Item(totalPrice>5000, article.category.id == "category 1") from $items
+	then
+		System.out.println("osnovni popust 7%");
+		$i.getItemDiscounts().add(new ItemDiscount($i, 7, "BASE"));		
+end

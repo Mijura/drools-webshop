@@ -70,6 +70,7 @@ public class Item {
 		this.article = article;
 		this.amount = amount;
 		this.articlePriceOnDay = article.getPrice();
+		this.totalPrice = this.amount * this.articlePriceOnDay;
 	}
 
 	public Long getId() {
