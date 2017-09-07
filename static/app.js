@@ -13,7 +13,9 @@ angular.module('myApp',
 				controllerAs : "registerCtrl"	
 			})
 			.when('/home', {
-				templateUrl : 'views/home.html'
+				templateUrl : 'views/home.html',
+				controller : "homeController",
+				controllerAs : "homeCtrl"
 			})
 			.when('/customerCategories', {
 				templateUrl : 'views/customerCategories.html',

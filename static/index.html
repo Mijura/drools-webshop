@@ -23,6 +23,7 @@
       <script src="controllers/indexCtrl.js"></script>
       <script src="controllers/loginCtrl.js"></script>
       <script src="controllers/registerCtrl.js"></script>
+      <script src="controllers/homeCtrl.js"></script>
       <script src="controllers/customerCategoriesCtrl.js"></script>
       <script src="controllers/articleCategoriesCtrl.js"></script>
       <script src="controllers/saleCtrl.js"></script>
@@ -37,7 +38,7 @@
                </div>
                <div class="big_banner"> <a href="#"><img src="images/banner728.jpg" alt="" border="0" /></a> </div>
             </div>
-            <div id="logo"> <a ng-href="{{indexCtrl.homepage}}"><img src="images/logo.png" alt="" border="0" width="85" height="85" /></a> </div>
+            <div id="logo"> <a ng-href=""><img src="images/logo.png" alt="" border="0" width="85" height="85" /></a> </div>
          </div>
          <div id="main_content">
             <div id="menu_tab">
@@ -88,18 +89,14 @@
             </div>
 
             <div class="right_content" ng-show="indexCtrl.loggedIn">
-               <div class="shopping_cart">
+               <div class="shopping_cart" ng-show="indexCtrl.userData.role=='customer'">
                   <div class="title_box">Shopping cart</div>
-                  <div class="cart_details"> 3 items <br />
-                     <span class="border_cart"></span> Total: <span class="price">350$</span> 
+                  <div class="cart_details"> {{cart.length}} items <br />
+                     <span class="border_cart"></span> Total: <span class="price">{{indexCtrl.cartPrice}}$</span> 
                   </div>
-                  <div class="cart_icon"><a href="#"><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
+                  <div class="cart_icon"><a href=""><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
                </div>
-               <div class="title_box">Newsletter</div>
-               <div class="border_box">
-                  <input type="text" name="newsletter" class="newsletter_input" value="your email"/>
-                  <a href="#" class="join">subscribe</a> 
-               </div>
+               
                <div class="title_box">Special Products</div>
                <div class="border_box">
                   <div class="product_title"><a href="#">Makita 156 MX-VL</a></div>

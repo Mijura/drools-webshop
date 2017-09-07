@@ -2,7 +2,7 @@
 	// controller bound to application body, parent controller to all others
 	angular.module("myApp").controller('loginController', loginController);
 	
-	function loginController($scope, $http, $window, toastr) {
+	function loginController($scope, $http, toastr) {
 		var vm = this;
 		
 		vm.login = function(){
@@ -18,7 +18,7 @@
 				
 				$scope.indexCtrl.login(response.data.response);
 				toastr.success(vm.username + " welcome!");
-				$window.location = "#!/home";
+				
 
 			}, function(response) {
 				toastr.error(response.data.response);
