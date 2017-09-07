@@ -27,6 +27,7 @@
       <script src="controllers/customerCategoriesCtrl.js"></script>
       <script src="controllers/articleCategoriesCtrl.js"></script>
       <script src="controllers/saleCtrl.js"></script>
+      <script src="controllers/cartCtrl.js"></script>
    </head>
    <body ng-app="myApp" ng-controller="indexController as indexCtrl">
       <div id="main_container">
@@ -51,6 +52,8 @@
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/articleCategories" class="nav">Article Categories</a></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/sale" class="nav">Sale</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'"><a href="#!/home" class="nav">Homepage</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
                </ul>
             </div>
@@ -94,7 +97,7 @@
                   <div class="cart_details"> {{cart.length}} items <br />
                      <span class="border_cart"></span> Total: <span class="price">{{indexCtrl.cartPrice}}$</span> 
                   </div>
-                  <div class="cart_icon"><a href=""><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
+                  <div class="cart_icon"><a href="#!/cart" ><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
                </div>
                
                <div class="title_box">Special Products</div>

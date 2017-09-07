@@ -32,6 +32,11 @@ angular.module('myApp',
 				controller : "saleController",
 				controllerAs : "saleCtrl"
 			})
+			.when('/cart', {
+				templateUrl : 'views/cart.html',
+				controller : "cartController",
+				controllerAs : "cartCtrl"
+			})
 			.otherwise({
 				redirectTo : '/'
 			});

@@ -598,6 +598,14 @@ background:url(images/button_bg.gif) no-repeat center;
 text-align:center;
 line-height:26px;
 }
+
+.right_text{
+
+float:right;
+padding-right:20px;
+text-align:center;
+line-height:26px;
+}
 .right_button a{
 font-size:10px;
 color:#D8325D;

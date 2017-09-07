@@ -1,0 +1,37 @@
+<div ng-show="cartCtrl.view">
+	<div class="center_title_bar">Shopping Cart</div>
+	<div class="prod_box_big">
+	<div class="center_prod_box_big">
+      <div class="table_grid" ng-show="cartCtrl.view==1">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">No.</a></th>
+               <th style="width:auto;"><a href="" class="pink">ID</a></th>
+               <th align="left" style="width:auto;"><a href="" class="pink">Image</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Category</a></th>
+               <th style="width:22px;"><a href="" class="pink">Price</a></th>
+               <th style="width:22px;"><a href="" class="pink">Amount</a></th>
+               <th style="width:22px;"><a href="" class="pink">Final</a></th>
+               <th style="width:22px;"><a href="" class="pink">Remove</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in cart">
+               <td>{{$index+1}}</td>
+               <td>{{x.id}}</td>
+               <td><img alt="" ng-src="{{cartCtrl.calcImage(x.id)}}" width="30" height="30" border="0" /></td>
+               <td>{{x.name}}</td>
+               <td>{{x.category.name}}</td>
+			   <td>{{x.price}}$</td>
+			   <td>{{x.amount}}</td>
+			   <td>{{x.amount*x.price}}$</td>
+               <td><a href="" ng-click=""><img src="images/delete.png" width="22" height="22" border="0" /></a></td>
+            </tr>
+            
+         </table>
+         <div class="right_button" ng-show="cart.length>0" style="padding-top:5px;">
+         	<a href="" ng-click="cartCtrl.getDiscounts()">Get discounts</a></div>
+         <p class="right_text">Price without discounts: {{cartCtrl.cartPrice}}$</p>
+      </div>
+     </div>
+     </div>
+</div>

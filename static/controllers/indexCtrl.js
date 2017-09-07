@@ -22,10 +22,11 @@
 		$scope.$watchCollection('cart', function(cart) {
 			vm.cartPrice=0;
 			cart.forEach(function(x) {
-				if(x.amount)
-					vm.cartPrice = Math.round((vm.cartPrice + x.price*x.amount) * 100) / 100;
-				else
-					vm.cartPrice = Math.round((vm.cartPrice + x.price) * 100) / 100;
+				if(!x.amount)
+					x["amount"]=1;
+				
+				vm.cartPrice = Math.round((vm.cartPrice + x.price*x.amount) * 100) / 100;
+				
 			});
 		});
 		
