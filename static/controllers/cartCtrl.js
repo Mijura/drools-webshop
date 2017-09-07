@@ -15,8 +15,22 @@
 			return "images/articles/"+btoa(id)+".jpg"
 		}
 		
+		vm.calcFinalPrice = function(x){
+			return Math.round((x.amount*x.price) * 100) / 100;
+		}
+		
+		
 		vm.getDiscounts = function(){
-			alert(JSON.stringify($scope.cart));
+			$http.post('/api/customer/getDiscounts', $scope.cart).then(function(response) {
+				
+				if(response.data){
+					alert(JSON.stringify(response.data));
+					//vm.articles = response.data;
+					//vm.view = 1;
+				}
+			}, function(response) {
+				toastr.error("Access Denied!");
+			});
 		}
 	}
     

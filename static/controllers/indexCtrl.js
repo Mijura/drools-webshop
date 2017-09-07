@@ -19,19 +19,34 @@
 			
 		}
 		
-		$scope.$watchCollection('cart', function(cart) {
+		function calcCartPrice(){
 			vm.cartPrice=0;
-			cart.forEach(function(x) {
-				if(!x.amount)
-					x["amount"]=1;
-				
+			$scope.cart.forEach(function(x) {
 				vm.cartPrice = Math.round((vm.cartPrice + x.price*x.amount) * 100) / 100;
 				
 			});
-		});
+		}
 		
 		vm.addToChart = function(article){
-			$scope.cart.push(article);
+			if(!article.amount){
+				toastr.error("Enter amount!");
+				return;
+			}
+			
+			var find = false;
+			$scope.cart.forEach(function(x) {
+				if(x.id==article.id){
+					x.amount = x.amount + article.amount;
+					find=true;
+				}
+					
+			});
+			
+			if(!find)
+				$scope.cart.push(JSON.parse(JSON.stringify(article)));
+			
+			calcCartPrice();
+			toastr.success("Succesfully added article to chart");
 		}
 		
 		vm.login = function(token){

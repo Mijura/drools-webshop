@@ -23,7 +23,7 @@
                <td>{{x.category.name}}</td>
 			   <td>{{x.price}}$</td>
 			   <td>{{x.amount}}</td>
-			   <td>{{x.amount*x.price}}$</td>
+			   <td>{{cartCtrl.calcFinalPrice(x)}}$</td>
                <td><a href="" ng-click=""><img src="images/delete.png" width="22" height="22" border="0" /></a></td>
             </tr>
             

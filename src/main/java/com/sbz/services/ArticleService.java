@@ -18,4 +18,8 @@ public class ArticleService {
 		return repository.findAllByStatus(status);
 	}
 
+	public Article findOne(Long id) {
+		return repository.findOne(id);
+	}
+
 }

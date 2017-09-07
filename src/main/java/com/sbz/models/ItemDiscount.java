@@ -35,6 +35,13 @@ public class ItemDiscount {
 		this.discount = discount;
 		this.type = type;
 	}
+	
+	public ItemDiscount(Item item, int discount, String type) {
+		super();
+		this.item = item;
+		this.discount = discount;
+		this.type = type;
+	}
 
 	public Long getId() {
 		return id;

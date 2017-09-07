@@ -25,6 +25,22 @@ public class JWTVerify {
 		} 
 	}
 
+	public static String verifyAndGetUsername(String token, String role){
+		if(token==null)
+			return null;
+		try {
+		    Algorithm algorithm = Algorithm.HMAC256("sbz");
+		    JWTVerifier verifier = JWT.require(algorithm)
+		    	.withClaim("role", role)
+		        .build(); //Reusable verifier instance
+		    
+			DecodedJWT jwt = verifier.verify(token);
+		    return jwt.getClaim("username").asString();
+		} catch (Exception exception){
+			return null;
+		} 
+	}
+	
 	
 
 }
