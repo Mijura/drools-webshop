@@ -36,10 +36,12 @@ INSERT INTO article_category (`id`, `max_discount`, `name`) VALUES ('category 4'
 
 INSERT INTO article_category VALUES ('category 5', '15', 'Groceries', 'category 1');
 INSERT INTO article_category VALUES ('category 6', '12', 'Cosmetics', 'category 1');
-INSERT INTO article_category VALUES ('category 7', '12', 'Cleaning Products', 'category 1');
+INSERT INTO article_category VALUES ('category 7', '20', 'Cleaning Products', 'category 1');
 INSERT INTO article_category VALUES ('category 8', '12', 'Home Appliances', 'category 2');
-INSERT INTO article_category VALUES ('category 9', '25', 'Audio and TV', 'category 2');
+INSERT INTO article_category VALUES ('category 9', '25', 'TV', 'category 2');
 INSERT INTO article_category VALUES ('category 10', '15', 'Computers', 'category 2');
+INSERT INTO article_category VALUES ('category 11', '17', 'Audio', 'category 2');
+INSERT INTO article_category VALUES ('category 12', '16', 'Laptops', 'category 2');
 
 INSERT INTO sale (`id`, `name`, `discount`, `from_date`, `to_date`) VALUES ('sale 1', 'New Year', 30, '2017-12-20 00:00:00', '2018-01-30 00:00:00');
 INSERT INTO sale (`id`, `name`, `discount`, `from_date`, `to_date`) VALUES ('sale 2', '1. May', 40, '2017-04-30 00:00:00', '2017-05-01 00:00:00');
@@ -53,7 +55,7 @@ INSERT INTO sale_article_categories values ('sale 3', 'category 3');
 INSERT INTO sale_article_categories values ('sale 3', 'category 4');
 INSERT INTO sale_article_categories values ('sale 3', 'category 1');
 
-INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('2.0 Sound System', 'category 9', 17.99, 20, '2016-08-02 17:41:51', FALSE, 10, 'ACTIVE');
+INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('2.0 Sound System', 'category 11', 17.99, 20, '2016-08-02 17:41:51', FALSE, 10, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Bread', 'category 5', 0.88, 100, '2017-04-03 05:44:12', FALSE, 30, 'ARCHIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Chair', 'category 8', 124.79, 4, '2013-05-09 17:41:51', FALSE, 5, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Coca Cola 6 Pack', 'category 1', 3.99, 111, '2017-08-22 06:37:43', FALSE, 100, 'ACTIVE');
@@ -78,3 +80,4 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Smartwater 6x1.5l', 'category 1', 5, 10, '2016-08-02 17:41:51', FALSE, 7, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Toaster Oven', 'category 8', 50, 4, '2016-08-02 17:41:51', FALSE, 5, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Vizari Striker Soccer Shoe', 'category 3', 150, 10, '2017-07-08 13:11:26', FALSE, 10, 'ACTIVE');
+INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Acer Aspire F 15-Inch', 'category 12', 470, 30, '2016-11-11 03:18:32', FALSE, 15, 'ACTIVE');

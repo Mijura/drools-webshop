@@ -7,14 +7,19 @@ import com.sbz.models.ItemDiscount;
 import java.util.ArrayList;
 
 rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kategoriji siroke potrosnje"
-
 	when
 		$r: Receipt($items: items)
-		$i: Item(amount>20, article.getCategory.getId() != "category 1", 
-			article.getCategory().getSuperCategory()==null || 
-			article.getCategory().getSuperCategory().getId()!= "category 1") from $items
+		$i: Item(amount>20, article.category.id != "category 1") from $items
 	then
 		System.out.println("osnovni popust 10%");
-		$i.getItemDiscounts().add(new ItemDiscount($i, 10, "BASE"));
-		
+		$i.getItemDiscounts().add(new ItemDiscount($i, 10, "BASE"));		
+end
+
+rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategoriji televizora, racunara ili laptopova"
+	when
+		$r: Receipt($items: items)
+		$i: Item(amount>5, article.category.id in ("category 10", "category 9", "category 12")) from $items
+	then
+		System.out.println("osnovni popust 5%");
+		$i.getItemDiscounts().add(new ItemDiscount($i, 5, "BASE"));		
 end
