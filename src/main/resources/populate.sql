@@ -85,7 +85,7 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Acer Aspire F 15-Inch', 'category 12', 470, 30, '2016-11-11 03:18:32', FALSE, 15, 'ACTIVE');
 
 INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-03 03:18:32', 'SUCCESS', 'mio');
-INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-08-03 03:18:32', 'SUCCESS', 'mio');
+INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-08-10 03:18:32', 'SUCCESS', 'mio');
 INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-05 03:18:32', 'SUCCESS', 'mio');
 
 INSERT INTO item (`article`, `receipt`) VALUES (1, 1);

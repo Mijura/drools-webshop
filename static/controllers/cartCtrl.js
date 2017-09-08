@@ -25,7 +25,12 @@
 			$http.post('/api/customer/getDiscounts', $scope.cart).then(function(response) {
 				
 				if(response.data){
-					alert(JSON.stringify(response.data));
+					
+					response.data.items.forEach(function(x) {
+						alert(JSON.stringify(x.name));
+						alert(JSON.stringify(x.itemDiscounts));
+					});
+					
 					//vm.articles = response.data;
 					//vm.view = 1;
 				}

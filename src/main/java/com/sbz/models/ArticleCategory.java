@@ -1,8 +1,14 @@
 package com.sbz.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,14 +26,18 @@ public class ArticleCategory {
 	@ManyToOne
 	private ArticleCategory superCategory;
 	
+	@ManyToMany(mappedBy = "articleCategories", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	List<Sale> sales;
+	
 	public ArticleCategory(){}
 
-	public ArticleCategory(String id, String name, Integer maxDiscount, ArticleCategory superCategory) {
+	public ArticleCategory(String id, String name, Integer maxDiscount, ArticleCategory superCategory, ArrayList<Sale> sales) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.maxDiscount = maxDiscount;
 		this.superCategory = superCategory;
+		this.sales = sales;
 	}
 
 	public String getId() {
@@ -61,6 +71,15 @@ public class ArticleCategory {
 	public void setSuperCategory(ArticleCategory superCategory) {
 		this.superCategory = superCategory;
 	}
+
+	public List<Sale> getSales() {
+		return sales;
+	}
+
+	public void setSales(List<Sale> sales) {
+		this.sales = sales;
+	}
+	
 	
 	
 }
