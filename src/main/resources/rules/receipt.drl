@@ -2,6 +2,9 @@ package rules
 
 import com.sbz.models.Receipt;
 import com.sbz.models.ReceiptDiscount;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.time.Instant;
 
 rule "osnovni popust 5% na racun ukoliko ukupna vrednost narucenih artikala prelazi 200000"
 	agenda-group "receipt"
@@ -12,4 +15,13 @@ rule "osnovni popust 5% na racun ukoliko ukupna vrednost narucenih artikala prel
     then
     	System.out.println("Osnovni popust 5% na ceo racun");
         $r.getDiscounts().add(new ReceiptDiscount($r, 5, "BASE")); 
+end
+
+rule "dodatni popust 1% ukoliko je kupac korisnik sistema vise od 2 godine"
+	agenda-group "receipt"
+    when 
+    	$r:	Receipt(customer.registered.toInstant().isBefore(ZonedDateTime.now().plusYears(-2).toInstant()))
+    then
+    	System.out.println("Osnovni popust 1% na ceo racun");
+        $r.getDiscounts().add(new ReceiptDiscount($r, 1, "ADDITIONAL")); 
 end
