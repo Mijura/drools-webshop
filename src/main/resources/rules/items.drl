@@ -10,6 +10,7 @@ import com.sbz.models.Sale;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.time.Instant;
+import java.util.List;
 import java.util.ArrayList;
 
 rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kategoriji siroke potrosnje"
@@ -19,7 +20,7 @@ rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kat
 		$i: Item(amount>20, article.category.id != "category 1") from $items
 	then
 		System.out.println($i.getArticle().getName()+": osnovni popust 10%");
-		$i.getItemDiscounts().add(new ItemDiscount($i, 10, "BASE"));		
+		$i.getItemDiscounts().add(new ItemDiscount($i, 10, "BASE"));	
 end
 
 rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategoriji televizora, racunara ili laptopova"
@@ -29,7 +30,7 @@ rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategori
 		$i: Item(amount>5, article.category.id in ("category 10", "category 9", "category 12")) from $items
 	then
 		System.out.println($i.getArticle().getName()+": osnovni popust 5%");
-		$i.getItemDiscounts().add(new ItemDiscount($i, 5, "BASE"));		
+		$i.getItemDiscounts().add(new ItemDiscount($i, 5, "BASE"));	
 end
 
 rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i njen artikal pripada sirokoj potrosnji"
@@ -42,8 +43,27 @@ rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i 
 		$i.getItemDiscounts().add(new ItemDiscount($i, 7, "BASE"));		
 end
 
+rule "ostavljanje najveceg osnovnog popusta"
+	salience -1
+	when
+		$r:	Receipt($items: items)
+		$i:	Item($ds: itemDiscounts, itemDiscounts.size()>1) from $items
+		$max: Integer() 
+		    	from accumulate(ItemDiscount(type=="BASE", $d : discount) from $ds, max($d))
+	then		
+		int i=0;
+		while(i<$ds.size()){
+			if($i.getItemDiscounts().get(i).getType()=="BASE" && $max > $i.getItemDiscounts().get(i).getDiscount()){
+				$ds.remove(i);
+				i--;
+			}
+			i++;
+		}
+end
+
 rule "dodatni popust 2% za stavku ukoliko je artikal iz stavke vec kupovan u prethodnih 15 dana"
 	lock-on-active true
+	salience -2
 	when
 		$r:	Receipt($items: items, $cr: customer.getReceipts())
 		    Receipt(state=="SUCCESS", $previousItems: items, date.toInstant().isAfter(ZonedDateTime.now().plusDays(-15).toInstant())) from $cr
@@ -58,6 +78,7 @@ end
 
 rule "dodatni popust 1% za stavku ukoliko su proizvodi iz kategorije tog artikla kupovani u prethodnih 30 dana"
 	lock-on-active true
+	salience -2
 	when
 		$r:	Receipt($items: items, $cr: customer.getReceipts())
 		    Receipt(state=="SUCCESS", $previousItems: items, date.toInstant().isAfter(ZonedDateTime.now().plusDays(-30).toInstant())) from $cr
@@ -72,6 +93,7 @@ end
 
 rule "akcijski popust ukoliko je artikal iz stavke na akciji"
 	lock-on-active true
+	salience -2
 	when
 		$r:	Receipt($items: items)
 		$i:	Item($s: article.category.sales) from $items
@@ -84,7 +106,7 @@ end
 
 rule "finalni popust za stavku i izracunavanje ukupne cene stavke"
 	lock-on-active true
-	salience -10
+	salience -3
 	when
 		$r:	Receipt($items: items)
 		$i:	Item($ds: itemDiscounts, $md: article.category.maxDiscount) from $items
