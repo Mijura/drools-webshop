@@ -47,6 +47,18 @@ rule "dodatni popust 2% za stavku ukoliko je artikal iz stavke vec kupovan u pre
 	then
 		$i.getItemDiscounts().add(new ItemDiscount($i, 2, "ADDITIONAL"));
 		update($r);
-		System.out.println("dodatni popust 2%");
-			
+		System.out.println("dodatni popust 2%");	
+end
+
+rule "dodatni popust 1% za stavku ukoliko su proizvodi iz kategorije tog artikla kupovani u prethodnih 30 dana"
+	when
+		$r:	Receipt($items: items, $cr: customer.getReceipts())
+		    Receipt(state=="SUCCESS", $previousItems: items, date.toInstant().isAfter(ZonedDateTime.now().plusDays(-30).toInstant())) from $cr
+	   $pi: Item() from $previousItems
+		$i:	Item(article.category==$pi.article.category, $id: itemDiscounts) from $items
+			not (ItemDiscount(type=="ADDITIONAL", discount==1) from $id)
+	then
+		$i.getItemDiscounts().add(new ItemDiscount($i, 1, "ADDITIONAL"));
+		update($r);
+		System.out.println("dodatni popust 1%");	
 end
