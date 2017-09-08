@@ -1,0 +1,15 @@
+package rules
+
+import com.sbz.models.Receipt;
+import com.sbz.models.ReceiptDiscount;
+
+rule "osnovni popust 5% na racun ukoliko ukupna vrednost narucenih artikala prelazi 200000"
+	agenda-group "receipt"
+    when 
+    	$r:	Receipt($items: items)
+       $tp: Double(doubleValue>200000) 
+		    	from accumulate(Item($tpi : totalPrice) from $items, sum($tpi))
+    then
+    	System.out.println("Osnovni popust 5% na ceo racun");
+        $r.getDiscounts().add(new ReceiptDiscount($r, 5, "BASE")); 
+end

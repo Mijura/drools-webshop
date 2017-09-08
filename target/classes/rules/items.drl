@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kategoriji siroke potrosnje"
+	agenda-group "items"
 	lock-on-active true
 	when
 			Receipt($items: items)
@@ -24,6 +25,7 @@ rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kat
 end
 
 rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategoriji televizora, racunara ili laptopova"
+	agenda-group "items"
 	lock-on-active true
 	when
 			Receipt($items: items)
@@ -34,6 +36,7 @@ rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategori
 end
 
 rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i njen artikal pripada sirokoj potrosnji"
+	agenda-group "items"
 	lock-on-active true
 	when
 			Receipt($items: items)
@@ -44,6 +47,7 @@ rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i 
 end
 
 rule "ostavljanje najveceg osnovnog popusta"
+	agenda-group "items"
 	salience -1
 	when
 		$r:	Receipt($items: items)
@@ -62,6 +66,7 @@ rule "ostavljanje najveceg osnovnog popusta"
 end
 
 rule "dodatni popust 2% za stavku ukoliko je artikal iz stavke vec kupovan u prethodnih 15 dana"
+	agenda-group "items"
 	lock-on-active true
 	salience -2
 	when
@@ -77,6 +82,7 @@ rule "dodatni popust 2% za stavku ukoliko je artikal iz stavke vec kupovan u pre
 end
 
 rule "dodatni popust 1% za stavku ukoliko su proizvodi iz kategorije tog artikla kupovani u prethodnih 30 dana"
+	agenda-group "items"
 	lock-on-active true
 	salience -2
 	when
@@ -92,6 +98,7 @@ rule "dodatni popust 1% za stavku ukoliko su proizvodi iz kategorije tog artikla
 end
 
 rule "akcijski popust ukoliko je artikal iz stavke na akciji"
+	agenda-group "items"
 	lock-on-active true
 	salience -2
 	when
@@ -105,7 +112,7 @@ rule "akcijski popust ukoliko je artikal iz stavke na akciji"
 end
 
 rule "finalni popust za stavku i izracunavanje ukupne cene stavke"
-	lock-on-active true
+	agenda-group "items"
 	salience -3
 	when
 		$r:	Receipt($items: items)

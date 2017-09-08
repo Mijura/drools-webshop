@@ -67,7 +67,10 @@ public class CustomerController {
 			
 			KieSession kieSession = kieContainer.newKieSession("session");
 			kieSession.insert(receipt);
+			kieSession.getAgenda().getAgendaGroup("items").setFocus();
+			kieSession.fireAllRules();
 			
+			kieSession.getAgenda().getAgendaGroup("receipt").setFocus();
 			kieSession.fireAllRules();
 			
 			return new ResponseEntity<Receipt>(receipt, HttpStatus.OK);

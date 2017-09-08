@@ -1,5 +1,6 @@
 package com.sbz.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Receipt {
 	private List<Item> items;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<ReceiptDiscount> discounts;
+	private List<ReceiptDiscount> discounts=new ArrayList<ReceiptDiscount>();
 	
 	public Receipt(){}
 

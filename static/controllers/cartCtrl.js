@@ -19,13 +19,11 @@
 			return Math.round((x.amount*x.price) * 100) / 100;
 		}
 		
-		
 		vm.getDiscounts = function(){
 
 			$http.post('/api/customer/getDiscounts', $scope.cart).then(function(response) {
 				
 				if(response.data){
-					
 					response.data.items.forEach(function(x) {
 						alert(JSON.stringify(x.finalPrice));
 						alert(JSON.stringify(x.itemDiscounts));

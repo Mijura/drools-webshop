@@ -35,6 +35,13 @@ public class ReceiptDiscount {
 		this.discount = discount;
 		this.type = type;
 	}
+	
+	public ReceiptDiscount(Receipt receiptDisc, Integer discount, String type) {
+		super();
+		this.receiptDisc = receiptDisc;
+		this.discount = discount;
+		this.type = type;
+	}
 
 	public Long getId() {
 		return id;
