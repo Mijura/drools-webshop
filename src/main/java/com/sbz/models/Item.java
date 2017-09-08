@@ -73,6 +73,10 @@ public class Item {
 		this.itemDiscounts = itemDiscounts;
 	}
 
+	public void calcFinal() {
+		finalPrice = totalPrice - totalPrice*discount/100;
+	}
+	
 	public Long getId() {
 		return id;
 	}

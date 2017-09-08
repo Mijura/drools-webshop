@@ -27,7 +27,7 @@
 				if(response.data){
 					
 					response.data.items.forEach(function(x) {
-						alert(JSON.stringify(x.name));
+						alert(JSON.stringify(x.finalPrice));
 						alert(JSON.stringify(x.itemDiscounts));
 					});
 					

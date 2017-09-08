@@ -5,6 +5,7 @@ import com.sbz.models.Receipt;
 import com.sbz.models.Item;
 import com.sbz.models.ItemDiscount;
 import com.sbz.models.Article;
+import com.sbz.models.ArticleCategory;
 import com.sbz.models.Sale;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -72,10 +73,30 @@ end
 rule "akcijski popust ukoliko je artikal iz stavke na akciji"
 	lock-on-active true
 	when
-		$r:	Receipt($items: items, $d: date)
+		$r:	Receipt($items: items)
 		$i:	Item($s: article.category.sales) from $items
 		    Sale(fromDate.getTime()< (new Date()).getTime(), toDate.getTime()> (new Date()).getTime(), $discount: discount) from $s
 	then
 		$i.getItemDiscounts().add(new ItemDiscount($i, $discount, "ADDITIONAL"));
-		System.out.println($i.getArticle().getName()+": akcijski popust");	
+		update($r);
+		System.out.println($i.getArticle().getName()+": akcijski popust "+$discount);
+end
+
+rule "finalni popust za stavku i izracunavanje ukupne cene stavke"
+	lock-on-active true
+	salience -10
+	when
+		$r:	Receipt($items: items)
+		$i:	Item($ds: itemDiscounts, $md: article.category.maxDiscount) from $items
+		$n: Integer() 
+		    	from accumulate(ItemDiscount($d : discount) from $ds, sum($d))
+	then
+		System.out.println($i.getArticle().getName()+": finalni popust "+$n+"%");
+		System.out.println("max discount: "+$md+"%");
+		if($md<=$n){
+			$i.setDiscount($md);
+		}else{
+			$i.setDiscount($n);
+		}
+		$i.calcFinal();
 end
