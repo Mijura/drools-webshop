@@ -20,8 +20,8 @@ public class Item {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(nullable = false)
-	private int number;
+	@Column
+	private Integer number;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "receipt")
@@ -31,28 +31,35 @@ public class Item {
 	@JoinColumn(name = "article")
 	private Article article;
 	
-	@Column(nullable = false)
-	private double articlePriceOnDay;
+	@Column
+	private Double articlePriceOnDay;
 	
-	@Column(nullable = false)
-	private int amount;
+	@Column
+	private Integer amount;
 	
-	@Column(nullable = false)
-	private double totalPrice;
+	@Column
+	private Double totalPrice;
 	
-	@Column(nullable = false)
-	private int discount;
+	@Column
+	private Integer discount;
 	
-	@Column(nullable = false)
-	private double finalPrice;
+	@Column
+	private Double finalPrice;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ItemDiscount> itemDiscounts = new ArrayList<ItemDiscount>();
 	
 	public Item(){}
-	
-	public Item(Long id, int number, Receipt receipt, Article article, double articlePriceOnDay, int amount,
-			double totalPrice, int discount, double finalPrice, List<ItemDiscount> itemDiscounts) {
+
+	public Item(Article article, Integer amount) {
+		this.article = article;
+		this.amount = amount;
+		this.articlePriceOnDay = article.getPrice();
+		this.totalPrice = this.amount * this.articlePriceOnDay;
+	}
+
+	public Item(Long id, Integer number, Receipt receipt, Article article, Double articlePriceOnDay, Integer amount,
+			Double totalPrice, Integer discount, Double finalPrice, List<ItemDiscount> itemDiscounts) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -66,13 +73,6 @@ public class Item {
 		this.itemDiscounts = itemDiscounts;
 	}
 
-	public Item(Article article, int amount) {
-		this.article = article;
-		this.amount = amount;
-		this.articlePriceOnDay = article.getPrice();
-		this.totalPrice = this.amount * this.articlePriceOnDay;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -81,11 +81,11 @@ public class Item {
 		this.id = id;
 	}
 
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -105,43 +105,43 @@ public class Item {
 		this.article = article;
 	}
 
-	public double getArticlePriceOnDay() {
+	public Double getArticlePriceOnDay() {
 		return articlePriceOnDay;
 	}
 
-	public void setArticlePriceOnDay(double articlePriceOnDay) {
+	public void setArticlePriceOnDay(Double articlePriceOnDay) {
 		this.articlePriceOnDay = articlePriceOnDay;
 	}
 
-	public int getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
-	public double getTotalPrice() {
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 
-	public double getFinalPrice() {
+	public Double getFinalPrice() {
 		return finalPrice;
 	}
 
-	public void setFinalPrice(double finalPrice) {
+	public void setFinalPrice(Double finalPrice) {
 		this.finalPrice = finalPrice;
 	}
 
@@ -152,6 +152,7 @@ public class Item {
 	public void setItemDiscounts(List<ItemDiscount> itemDiscounts) {
 		this.itemDiscounts = itemDiscounts;
 	}
+
 	
 	
 	

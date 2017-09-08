@@ -5,6 +5,8 @@ INSERT INTO category (`name`) VALUES ("BRONZE");
 INSERT INTO category (`name`) VALUES ("SILVER");
 INSERT INTO category (`name`) VALUES ("GOLD");
 
+INSERT INTO user VALUES ('Customer', 'mio', 'Miodrag', 'Vilotijevic', 'mio', '2017-03-04 08:14:52', NULL, 0, 1);
+
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (0, 5000, 2);
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (5000, 10000, 3);
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (10000, 15000, 5);
@@ -81,3 +83,16 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Toaster Oven', 'category 8', 50, 4, '2016-08-02 17:41:51', FALSE, 5, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Vizari Striker Soccer Shoe', 'category 3', 150, 10, '2017-07-08 13:11:26', FALSE, 10, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Acer Aspire F 15-Inch', 'category 12', 470, 30, '2016-11-11 03:18:32', FALSE, 15, 'ACTIVE');
+
+INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-03 03:18:32', 'SUCCESS', 'mio');
+INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-08-03 03:18:32', 'SUCCESS', 'mio');
+INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-05 03:18:32', 'SUCCESS', 'mio');
+
+INSERT INTO item (`article`, `receipt`) VALUES (1, 1);
+INSERT INTO item (`article`, `receipt`) VALUES (1, 2);
+INSERT INTO item (`article`, `receipt`) VALUES (1, 3);
+
+INSERT INTO user_receipts VALUES ("mio", 1);
+INSERT INTO user_receipts VALUES ("mio", 2);
+INSERT INTO user_receipts VALUES ("mio", 3);
+

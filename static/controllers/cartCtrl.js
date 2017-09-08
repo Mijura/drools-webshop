@@ -21,7 +21,7 @@
 		
 		
 		vm.getDiscounts = function(){
-			alert(JSON.stringify($scope.cart));
+
 			$http.post('/api/customer/getDiscounts', $scope.cart).then(function(response) {
 				
 				if(response.data){

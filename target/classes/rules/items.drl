@@ -4,11 +4,15 @@ package rules
 import com.sbz.models.Receipt;
 import com.sbz.models.Item;
 import com.sbz.models.ItemDiscount;
+import com.sbz.models.Article;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.time.Instant;
 import java.util.ArrayList;
 
 rule "osnovni popust 10% za stavku sa više od 20 artikla, koji ne pripadaju kategoriji siroke potrosnje"
 	when
-		$r: Receipt($items: items)
+			Receipt($items: items)
 		$i: Item(amount>20, article.category.id != "category 1") from $items
 	then
 		System.out.println("osnovni popust 10%");
@@ -17,7 +21,7 @@ end
 
 rule "osnovni popust 5% za stavku sa više od 5 artikla, koji pripadaju kategoriji televizora, racunara ili laptopova"
 	when
-		$r: Receipt($items: items)
+			Receipt($items: items)
 		$i: Item(amount>5, article.category.id in ("category 10", "category 9", "category 12")) from $items
 	then
 		System.out.println("osnovni popust 5%");
@@ -26,9 +30,23 @@ end
 
 rule "osnovni popust 7% za stavku cija ukupna narucena vrednost prelazi 5000, i njen artikal pripada sirokoj potrosnji"
 	when
-		$r: Receipt($items: items)
+			Receipt($items: items)
 		$i: Item(totalPrice>5000, article.category.id == "category 1") from $items
 	then
 		System.out.println("osnovni popust 7%");
 		$i.getItemDiscounts().add(new ItemDiscount($i, 7, "BASE"));		
+end
+
+rule "dodatni popust 2% za stavku ukoliko je artikal iz stavke vec kupovan u prethodnih 15 dana"
+	when
+		$r:	Receipt($items: items, $cr: customer.getReceipts())
+		    Receipt(state=="SUCCESS", $previousItems: items, date.toInstant().isAfter(ZonedDateTime.now().plusDays(-15).toInstant())) from $cr
+	   $pi: Item() from $previousItems
+		$i:	Item(article.id==$pi.article.id, $id: itemDiscounts) from $items
+			not (ItemDiscount(type=="ADDITIONAL", discount==2) from $id)
+	then
+		$i.getItemDiscounts().add(new ItemDiscount($i, 2, "ADDITIONAL"));
+		update($r);
+		System.out.println("dodatni popust 2%");
+			
 end

@@ -20,15 +20,15 @@ public class ItemDiscount {
 	@JsonBackReference
 	private Item item;
 	
-	@Column(nullable = false)
-	private int discount;
+	@Column
+	private Integer discount;
 	
-	@Column(nullable = false)
+	@Column
 	String type;
 
 	public ItemDiscount(){}
 	
-	public ItemDiscount(Long id, Item item, int discount, String type) {
+	public ItemDiscount(Long id, Item item, Integer discount, String type) {
 		super();
 		this.id = id;
 		this.item = item;
@@ -36,7 +36,7 @@ public class ItemDiscount {
 		this.type = type;
 	}
 	
-	public ItemDiscount(Item item, int discount, String type) {
+	public ItemDiscount(Item item, Integer discount, String type) {
 		super();
 		this.item = item;
 		this.discount = discount;
@@ -59,11 +59,11 @@ public class ItemDiscount {
 		this.item = item;
 	}
 
-	public int getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 

@@ -11,18 +11,18 @@ public class ArticleCategory {
 	@Id
 	private String id;
 	
-	@Column(nullable = false)
+	@Column
 	private String name;
 	
-	@Column(nullable = false)
-	private int maxDiscount;
+	@Column
+	private Integer maxDiscount;
 	
 	@ManyToOne
 	private ArticleCategory superCategory;
 	
 	public ArticleCategory(){}
 
-	public ArticleCategory(String id, String name, int maxDiscount, ArticleCategory superCategory) {
+	public ArticleCategory(String id, String name, Integer maxDiscount, ArticleCategory superCategory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,11 +46,11 @@ public class ArticleCategory {
 		this.name = name;
 	}
 
-	public int getMaxDiscount() {
+	public Integer getMaxDiscount() {
 		return maxDiscount;
 	}
 
-	public void setMaxDiscount(int maxDiscount) {
+	public void setMaxDiscount(Integer maxDiscount) {
 		this.maxDiscount = maxDiscount;
 	}
 

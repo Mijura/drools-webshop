@@ -22,28 +22,28 @@ public class Article {
 	@ManyToOne(cascade = CascadeType.ALL)
 	ArticleCategory category;
 	
-	@Column(nullable = false)
-	private double price;
+	@Column
+	private Double price;
 	
-	@Column(nullable = false)
-	private int count;
+	@Column
+	private Integer count;
 	
-	@Column(nullable = false)
+	@Column
 	private Date created;
 	
-	@Column(nullable = false)
+	@Column
 	private boolean ordered;
 	
-	@Column(nullable = false)
-	private int minCount;
+	@Column
+	private Integer minCount;
 	
-	@Column(nullable = false)
+	@Column
 	private String status;
 	
 	public Article(){}
 
-	public Article(Long id, String name, ArticleCategory category, double price, int count, Date created,
-			boolean ordered, int minCount, String status) {
+	public Article(Long id, String name, ArticleCategory category, Double price, Integer count, Date created,
+			boolean ordered, Integer minCount, String status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -80,19 +80,19 @@ public class Article {
 		this.category = category;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public int getCount() {
+	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(Integer count) {
 		this.count = count;
 	}
 
@@ -112,11 +112,11 @@ public class Article {
 		this.ordered = ordered;
 	}
 
-	public int getMinCount() {
+	public Integer getMinCount() {
 		return minCount;
 	}
 
-	public void setMinCount(int minCount) {
+	public void setMinCount(Integer minCount) {
 		this.minCount = minCount;
 	}
 
@@ -127,6 +127,8 @@ public class Article {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	
 	
 	
 }

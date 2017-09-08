@@ -3,12 +3,12 @@ package com.sbz.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer extends User {
@@ -18,12 +18,13 @@ public class Customer extends User {
 	private String address;
 	
 	@Column
-	private int points;
+	private Integer points;
 	
 	@ManyToOne
 	private Category category;
 	
-	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany
+	@JsonIgnore
 	private List<Receipt> receipts;
 
 	public Customer(){
@@ -46,11 +47,11 @@ public class Customer extends User {
 		this.address = address;
 	}
 
-	public int getPoints() {
+	public Integer getPoints() {
 		return points;
 	}
 
-	public void setPoints(int points) {
+	public void setPoints(Integer points) {
 		this.points = points;
 	}
 

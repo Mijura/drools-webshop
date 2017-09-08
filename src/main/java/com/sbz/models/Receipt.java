@@ -25,17 +25,17 @@ public class Receipt {
 	@ManyToOne
 	private Customer customer;
 	
-	@Column(nullable = false)
-	private double totalPrice;
+	@Column
+	private Double totalPrice;
 	
-	@Column(nullable = false)
-	private double finalPrice;
+	@Column
+	private Double finalPrice;
 	
-	@Column(nullable = false)
-	private int earnedPoints;
+	@Column
+	private Integer earnedPoints;
 	
-	@Column(nullable = false)
-	private int spentPoints;
+	@Column
+	private Integer spentPoints;
 	
 	@Column(nullable = false)
 	private String state;
@@ -48,7 +48,7 @@ public class Receipt {
 	
 	public Receipt(){}
 
-	public Receipt(Long id, Date date, Customer customer, double totalPrice, double finalPrice, int earnedPoints, int spentPoints,
+	public Receipt(Long id, Date date, Customer customer, Double totalPrice, Double finalPrice, Integer earnedPoints, Integer spentPoints,
 			String state, List<Item> items, List<ReceiptDiscount> discounts) {
 		super();
 		this.id = id;
@@ -87,35 +87,35 @@ public class Receipt {
 		this.customer = customer;
 	}
 
-	public double getTotalPrice() {
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public double getFinalPrice() {
+	public Double getFinalPrice() {
 		return finalPrice;
 	}
 
-	public void setFinalPrice(double finalPrice) {
+	public void setFinalPrice(Double finalPrice) {
 		this.finalPrice = finalPrice;
 	}
 
-	public int getEarnedPoints() {
+	public Integer getEarnedPoints() {
 		return earnedPoints;
 	}
 
-	public void setEarnedPoints(int earnedPoints) {
+	public void setEarnedPoints(Integer earnedPoints) {
 		this.earnedPoints = earnedPoints;
 	}
 
-	public int getSpentPoints() {
+	public Integer getSpentPoints() {
 		return spentPoints;
 	}
 
-	public void setSpentPoints(int spentPoints) {
+	public void setSpentPoints(Integer spentPoints) {
 		this.spentPoints = spentPoints;
 	}
 
@@ -142,9 +142,6 @@ public class Receipt {
 	public void setDiscounts(List<ReceiptDiscount> discounts) {
 		this.discounts = discounts;
 	}
-	
-	
-	
 	
 	
 }

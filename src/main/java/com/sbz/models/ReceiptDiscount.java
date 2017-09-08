@@ -20,15 +20,15 @@ public class ReceiptDiscount {
 	@JsonBackReference
 	private Receipt receiptDisc;
 	
-	@Column(nullable = false)
-	private int discount;
+	@Column
+	private Integer discount;
 	
-	@Column(nullable = false)
+	@Column
 	String type;
 
 	public ReceiptDiscount(){}
 	
-	public ReceiptDiscount(Long id, Receipt receiptDisc, int discount, String type) {
+	public ReceiptDiscount(Long id, Receipt receiptDisc, Integer discount, String type) {
 		super();
 		this.id = id;
 		this.receiptDisc = receiptDisc;
@@ -52,11 +52,11 @@ public class ReceiptDiscount {
 		this.receiptDisc = receiptDisc;
 	}
 
-	public int getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 

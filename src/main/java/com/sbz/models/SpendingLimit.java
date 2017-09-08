@@ -12,18 +12,18 @@ public class SpendingLimit {
 	@GeneratedValue
 	Long id;
 	
-	@Column(nullable = false)
-	private double fromLimit;
+	@Column
+	private Double fromLimit;
 	
-	@Column(nullable = false)
-	private double toLimit;
+	@Column
+	private Double toLimit;
 	
-	@Column(nullable = false)
-	private int priceToPoints;
+	@Column
+	private Integer priceToPoints;
 	
 	public SpendingLimit(){}
 
-	public SpendingLimit(Long id, double fromLimit, double toLimit, int priceToPoints) {
+	public SpendingLimit(Long id, Double fromLimit, Double toLimit, Integer priceToPoints) {
 		super();
 		this.id = id;
 		this.fromLimit = fromLimit;
@@ -39,27 +39,27 @@ public class SpendingLimit {
 		this.id = id;
 	}
 
-	public double getFromLimit() {
+	public Double getFromLimit() {
 		return fromLimit;
 	}
 
-	public void setFromLimit(double fromLimit) {
+	public void setFromLimit(Double fromLimit) {
 		this.fromLimit = fromLimit;
 	}
 
-	public double getToLimit() {
+	public Double getToLimit() {
 		return toLimit;
 	}
 
-	public void setToLimit(double toLimit) {
+	public void setToLimit(Double toLimit) {
 		this.toLimit = toLimit;
 	}
 
-	public int getPriceToPoints() {
+	public Integer getPriceToPoints() {
 		return priceToPoints;
 	}
 
-	public void setPriceToPoints(int priceToPoints) {
+	public void setPriceToPoints(Integer priceToPoints) {
 		this.priceToPoints = priceToPoints;
 	}
 

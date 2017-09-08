@@ -16,17 +16,17 @@ public class Sale {
 	@Id
 	private String id;
 	
-	@Column(nullable = false)
+	@Column
 	private String name;
 	
-	@Column(nullable = false)
+	@Column
 	private Date fromDate;
 	
-	@Column(nullable = false)
+	@Column
 	private Date toDate;
 	
-	@Column(nullable = false)
-	private int discount;
+	@Column
+	private Integer discount;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	List<ArticleCategory> articleCategories;
@@ -76,11 +76,11 @@ public class Sale {
 		this.toDate = toDate;
 	}
 
-	public int getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 
