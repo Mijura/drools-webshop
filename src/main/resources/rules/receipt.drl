@@ -22,6 +22,15 @@ rule "dodatni popust 1% ukoliko je kupac korisnik sistema vise od 2 godine"
     when 
     	$r:	Receipt(customer.registered.toInstant().isBefore(ZonedDateTime.now().plusYears(-2).toInstant()))
     then
-    	System.out.println("Osnovni popust 1% na ceo racun");
+    	System.out.println("Osnovni popust 1% na ceo racun - 2 godine");
+        $r.getDiscounts().add(new ReceiptDiscount($r, 1, "ADDITIONAL")); 
+end
+
+rule "dodatni popust 1% ukoliko kupac pripada kategoriji srebrni ili zlatni kupac"
+	agenda-group "receipt"
+    when 
+    	$r:	Receipt(customer.category.name=="GOLD" || customer.category.name=="SILVER")
+    then
+    	System.out.println("Osnovni popust 1% na ceo racun - zlatni/srebrni");
         $r.getDiscounts().add(new ReceiptDiscount($r, 1, "ADDITIONAL")); 
 end
