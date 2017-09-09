@@ -5,7 +5,7 @@ INSERT INTO category (`name`) VALUES ("BRONZE");
 INSERT INTO category (`name`) VALUES ("SILVER");
 INSERT INTO category (`name`) VALUES ("GOLD");
 
-INSERT INTO user VALUES ('Customer', 'mio', 'Miodrag', 'Vilotijevic', 'mio', '2017-03-04 08:14:52', NULL, 0, 1);
+INSERT INTO user VALUES ('Customer', 'mio', 'Miodrag', 'Vilotijevic', 'mio', '2015-03-04 08:14:52', NULL, 0, 3);
 
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (0, 5000, 2);
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (5000, 10000, 3);

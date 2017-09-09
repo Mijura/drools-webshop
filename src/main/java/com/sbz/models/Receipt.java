@@ -47,10 +47,13 @@ public class Receipt {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ReceiptDiscount> discounts=new ArrayList<ReceiptDiscount>();
 	
+	@Column
+	private Integer discount;
+	
 	public Receipt(){}
 
 	public Receipt(Long id, Date date, Customer customer, Double totalPrice, Double finalPrice, Integer earnedPoints, Integer spentPoints,
-			String state, List<Item> items, List<ReceiptDiscount> discounts) {
+			String state, List<Item> items, List<ReceiptDiscount> discounts, Integer discount) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -62,6 +65,7 @@ public class Receipt {
 		this.state = state;
 		this.items = items;
 		this.discounts = discounts;
+		this.discount = discount;
 	}
 
 	public Long getId() {
@@ -142,6 +146,14 @@ public class Receipt {
 
 	public void setDiscounts(List<ReceiptDiscount> discounts) {
 		this.discounts = discounts;
+	}
+
+	public Integer getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
 	}
 	
 	
