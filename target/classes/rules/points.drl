@@ -1,0 +1,13 @@
+package rules
+
+import com.sbz.models.Receipt;
+import com.sbz.models.SpendingLimit;
+
+rule "dodavanje nagradnih bodova na racun"
+	agenda-group "points"
+    when 
+    	$r:	Receipt($fp: finalPrice, $limits: customer.category.limits)
+    		SpendingLimit($fp>fromLimit, $fp<=toLimit, $d: priceToPoints) from $limits
+    then
+        $r.setEarnedPoints(((int)($fp * $d/100)));
+end

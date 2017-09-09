@@ -24,10 +24,8 @@
 			$http.post('/api/customer/getDiscounts', $scope.cart).then(function(response) {
 				
 				if(response.data){
-					
-					alert(JSON.stringify(response.data.discounts));
-					alert(JSON.stringify(response.data.discount));
 					alert(JSON.stringify(response.data.finalPrice));
+					alert(JSON.stringify(response.data.earnedPoints));
 					response.data.items.forEach(function(x) {
 						alert(JSON.stringify(x.finalPrice));
 						alert(JSON.stringify(x.itemDiscounts));

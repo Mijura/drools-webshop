@@ -73,6 +73,9 @@ public class CustomerController {
 			kieSession.getAgenda().getAgendaGroup("receipt").setFocus();
 			kieSession.fireAllRules();
 			
+			kieSession.getAgenda().getAgendaGroup("points").setFocus();
+			kieSession.fireAllRules();
+			
 			return new ResponseEntity<Receipt>(receipt, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Receipt>(HttpStatus.BAD_REQUEST);
