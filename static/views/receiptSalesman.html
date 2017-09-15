@@ -1,0 +1,84 @@
+<div ng-show="receiptSalesmanCtrl.view">
+	<div class="center_title_bar">Receipt</div>
+	<div class="prod_box_big">
+	<div class="right_buttons" style="padding-top:10px;">
+        <div class="right_button" ng-show="receiptSalesmanCtrl.ok" ng-click="receiptSalesmanCtrl.acceptReceipt()"><a href="" ng-click="articleCategoriesCtrl.newCategory=true;articleCategoriesCtrl.edit = null;">Accept</a></div>
+     	<div class="right_button" ><a href="" ng-click="receiptSalesmanCtrl.declineReceipt()">Decline</a></div>
+     </div>
+	<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:25px;"><a href="" class="pink">Condition</a></th>
+               <th style="width:auto;"><a href="" class="pink">ID</a></th>
+               <th align="left" style="width:auto;"><a href="" class="pink">Image</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Category</a></th>
+               <th style="width:22px;"><a href="" class="pink">Price</a></th>
+               <th style="width:22px;"><a href="" class="pink">Amount</a></th>
+               <th style="width:22px;"><a href="" class="pink">Final</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptSalesmanCtrl.articles">
+               <td ng-show="{{receiptSalesmanCtrl.calcIcon(x.article.count, x.amount)}}>=0"><a href="#!/receiptSalesman/{{x.id}}"><img src="images/yes.png" width="22" height="22" border="0" /></a></td>
+               <td ng-show="{{receiptSalesmanCtrl.calcIcon(x.article.count, x.amount)}}<0"><a href="#!/receiptSalesman/{{x.id}}"><img src="images/no.png" width="22" height="22" border="0" /></a></td>
+               <td>{{x.id}}</td>
+               <td><img alt="" ng-src="{{receiptSalesmanCtrl.calcImage(x.id)}}" width="30" height="30" border="0" /></td>
+               <td>{{x.name}}</td>
+               <td>{{x.category.name}}</td>
+			   <td>{{x.price}}$</td>
+			   <td>{{x.amount}}</td>
+			   <td>{{receiptSalesmanCtrl.calcFinalPrice(x)}}$</td>
+            </tr>
+            
+         </table>
+        </div>
+		<div class="center_prod_box_big">
+			<p>Status: {{receiptSalesmanCtrl.receipt.state}}</p>
+			<p>Total Price: {{receiptSalesmanCtrl.receipt.totalPrice}}$</p>
+			<p>Discount: {{receiptSalesmanCtrl.receipt.discount}}%</p>
+			<p>Final Price: {{receiptSalesmanCtrl.receipt.finalPrice}}$</p>
+			<p>Spent Points: {{receiptSalesmanCtrl.receipt.spentPoints}}</p>
+			<p>Earned Points: {{receiptSalesmanCtrl.receipt.earnedPoints}}</p>
+		</div>
+		
+		<div class="center_prod_box_big">
+		<div class="cart_title">Receipt Discounts</div>
+	
+		<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">Number</a></th>
+               <th style="width:auto;"><a href="" class="pink">Type</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptSalesmanCtrl.receipt.discounts">
+               <td>{{$index+1}}</td>
+               <td>{{x.type}}</td>
+               <td>{{x.discount}}%</td>
+            </tr>
+            
+         </table>
+         </div>
+        </div>
+        <div class="center_prod_box_big">
+		<div class="cart_title">Item Discounts</div>
+	
+		<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">Number</a></th>
+               <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Type</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptSalesmanCtrl.itemDiscounts">
+               <td>{{$index+1}}</td>
+               <td>{{x.name}}</td>
+               <td>{{x.type}}</td>
+               <td>{{x.discount}}%</td>
+            </tr>
+            
+         </table>
+         </div>
+        </div>
+	</div>
+</div>

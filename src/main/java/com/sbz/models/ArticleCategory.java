@@ -1,6 +1,5 @@
 package com.sbz.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ArticleCategory {
@@ -23,6 +25,10 @@ public class ArticleCategory {
 	@Column
 	private Integer maxDiscount;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	List<Article> articles;
+	
 	@ManyToOne
 	private ArticleCategory superCategory;
 	
@@ -30,12 +36,15 @@ public class ArticleCategory {
 	List<Sale> sales;
 	
 	public ArticleCategory(){}
+	
 
-	public ArticleCategory(String id, String name, Integer maxDiscount, ArticleCategory superCategory, ArrayList<Sale> sales) {
+	public ArticleCategory(String id, String name, Integer maxDiscount, List<Article> articles,
+			ArticleCategory superCategory, List<Sale> sales) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.maxDiscount = maxDiscount;
+		this.articles = articles;
 		this.superCategory = superCategory;
 		this.sales = sales;
 	}
@@ -78,6 +87,16 @@ public class ArticleCategory {
 
 	public void setSales(List<Sale> sales) {
 		this.sales = sales;
+	}
+
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 	
 	

@@ -1,0 +1,37 @@
+<div ng-show="stockCtrl.view">
+	<div class="center_title_bar">Critical Articles</div>
+	<div class="prod_box_big">
+		<div class="table_grid">
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<th style="width: 22px;"><a href="" class="pink">No.</a></th>
+					<th align="left" style="width: auto;"><a href="" class="pink">Image</a></th>
+					<th style="width: auto;"><a href="" class="pink">Name</a></th>
+					<th style="width: auto;"><a href="" class="pink">Category</a></th>
+					<th style="width: auto;"><a href="" class="pink">Min. Count</a></th>
+					<th style="width: auto;"><a href="" class="pink">Count</a></th>
+					<th style="width: auto;"><a href="" class="pink">Fill</a></th>
+				</tr>
+			
+				<tr ng-class-odd="'odd'" ng-class-even="'even'"
+					ng-repeat="x in stockCtrl.articles" for="{{name}}">
+					<td>{{$index+1}}</td>
+					<td><img alt="" ng-src="{{stockCtrl.calcImage(x.id)}}"
+						width="30" height="30" border="0" /></td>
+					<td>{{x.name}}</td>
+					<td>{{x.category.name}}</td>
+					<td>{{x.minCount}}</td>
+					<td>{{x.count}}</td>
+					<td><a href="" ng-click="stockCtrl.pr($index)"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
+				</tr>
+				
+			</table>
+		</div>
+		<br>
+		<div ng-show="stockCtrl.view2">
+			Article No {{stockCtrl.id}}<br><br>
+			<input type="number" ng-model="stockCtrl.ch">
+			<button ng-click="stockCtrl.fill()">fill</button>
+		</div>
+	</div>
+</div>

@@ -5,7 +5,7 @@ INSERT INTO category (`name`) VALUES ("BRONZE");
 INSERT INTO category (`name`) VALUES ("SILVER");
 INSERT INTO category (`name`) VALUES ("GOLD");
 
-INSERT INTO user VALUES ('Customer', 'mio', 'Miodrag', 'Vilotijevic', 'mio', '2015-03-04 08:14:52', NULL, 0, 3);
+INSERT INTO user VALUES ('Customer', 'mio', 'Miodrag', 'Vilotijevic', 'mio', '2015-03-04 08:14:52', 'Mise Dimitrijevica 3c, 21000 Novi Sad', 25, 3);
 
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (0, 5000, 2);
 INSERT INTO spending_limit (`from_limit`, `to_limit`, `price_to_points`) VALUES (5000, 10000, 3);
@@ -62,7 +62,7 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Chair', 'category 8', 124.79, 4, '2013-05-09 17:41:51', FALSE, 5, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Coca Cola 6 Pack', 'category 1', 3.99, 111, '2017-08-22 06:37:43', FALSE, 100, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Ferrero Gift box 24 count', 'category 1', 8.43, 46, '2016-08-02 17:41:51', FALSE, 32, 'ACTIVE');
-INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Fiji Water 1.5l', 'category 1', 1, 200, '2016-08-02 17:41:51', TRUE, 50, 'ACTIVE');
+INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Fiji Water 1.5l', 'category 1', 1, 200, '2016-08-02 17:41:51', FALSE, 50, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Keyboard Usb', 'category 10', 13.23, 25, '2016-08-02 17:41:51', FALSE, 15, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Loreal Oaris Perfect Hydra Nutrion', 'category 6', 6.32, 40, '2016-08-02 17:41:51', FALSE, 25, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Mens Light Jacket', 'category 4', 44, 17, '2016-08-02 17:41:51', FALSE, 15, 'ACTIVE');
@@ -73,7 +73,7 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Mini Basketball Hoop', 'category 3', 20, 2, '2016-08-02 17:41:51', FALSE, 1, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Mouse Usb', 'category 10', 6.87, 20, '2016-08-02 17:41:51', FALSE, 10, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Mr. Clean', 'category 7', 3, 56, '2016-08-02 17:41:51', FALSE, 20, 'ACTIVE');
-INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('NIVEA Creme Cream', 'category 6', 5, 150, '2016-08-02 17:41:51', TRUE, 30, 'ACTIVE');
+INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('NIVEA Creme Cream', 'category 6', 5, 150, '2016-08-02 17:41:51', FALSE, 30, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('NIVEA for Men Sensitive Shaving Gel', 'category 6', 10, 7, '2016-08-02 17:41:51', FALSE, 5, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('NIVEA Men Cool 3-in-1 Body Wash', 'category 6', 6.5, 20, '2016-11-29 20:01:04', FALSE, 15, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Nutella', 'category 5', 5, 50, '2017-04-08 10:39:17', FALSE, 30, 'ACTIVE');
@@ -84,15 +84,4 @@ INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordere
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Vizari Striker Soccer Shoe', 'category 3', 150, 10, '2017-07-08 13:11:26', FALSE, 10, 'ACTIVE');
 INSERT INTO article (`name`, `category_id`, `price`, `count`, `created`, `ordered`, `min_count`, `status`) VALUES ('Acer Aspire F 15-Inch', 'category 12', 470, 30, '2016-11-11 03:18:32', FALSE, 15, 'ACTIVE');
 
-INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-03 03:18:32', 'SUCCESS', 'mio');
-INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-08-10 03:18:32', 'SUCCESS', 'mio');
-INSERT INTO receipt (`date`, `state`, `customer_username`) VALUES ('2017-09-05 03:18:32', 'SUCCESS', 'mio');
-
-INSERT INTO item (`article`, `receipt`) VALUES (1, 1);
-INSERT INTO item (`article`, `receipt`) VALUES (1, 2);
-INSERT INTO item (`article`, `receipt`) VALUES (1, 3);
-
-INSERT INTO user_receipts VALUES ("mio", 1);
-INSERT INTO user_receipts VALUES ("mio", 2);
-INSERT INTO user_receipts VALUES ("mio", 3);
 

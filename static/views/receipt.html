@@ -1,0 +1,79 @@
+<div ng-show="receiptCtrl.view">
+	<div class="center_title_bar">Receipt</div>
+	<div class="prod_box_big">
+	<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">No.</a></th>
+               <th style="width:auto;"><a href="" class="pink">ID</a></th>
+               <th align="left" style="width:auto;"><a href="" class="pink">Image</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Category</a></th>
+               <th style="width:22px;"><a href="" class="pink">Price</a></th>
+               <th style="width:22px;"><a href="" class="pink">Amount</a></th>
+               <th style="width:22px;"><a href="" class="pink">Final</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptCtrl.articles">
+               <td>{{$index+1}}</td>
+               <td>{{x.id}}</td>
+               <td><img alt="" ng-src="{{receiptCtrl.calcImage(x.id)}}" width="30" height="30" border="0" /></td>
+               <td>{{x.name}}</td>
+               <td>{{x.category.name}}</td>
+			   <td>{{x.price}}$</td>
+			   <td>{{x.amount}}</td>
+			   <td>{{receiptCtrl.calcFinalPrice(x)}}$</td>
+            </tr>
+            
+         </table>
+        </div>
+		<div class="center_prod_box_big">
+			<p>Status: {{receiptCtrl.receipt.state}}</p>
+			<p>Total Price: {{receiptCtrl.receipt.totalPrice}}$</p>
+			<p>Discount: {{receiptCtrl.receipt.discount}}%</p>
+			<p>Final Price: {{receiptCtrl.receipt.finalPrice}}$</p>
+			<p>Spent Points: {{receiptCtrl.receipt.spentPoints}}</p>
+			<p>Earned Points: {{receiptCtrl.receipt.earnedPoints}}</p>
+		</div>
+		
+		<div class="center_prod_box_big">
+		<div class="cart_title">Receipt Discounts</div>
+	
+		<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">Number</a></th>
+               <th style="width:auto;"><a href="" class="pink">Type</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptCtrl.receipt.discounts">
+               <td>{{$index+1}}</td>
+               <td>{{x.type}}</td>
+               <td>{{x.discount}}%</td>
+            </tr>
+            
+         </table>
+         </div>
+        </div>
+        <div class="center_prod_box_big">
+		<div class="cart_title">Item Discounts</div>
+	
+		<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;"><a href="" class="pink">Number</a></th>
+               <th style="width:auto;"><a href="" class="pink">Name</a></th>
+               <th style="width:auto;"><a href="" class="pink">Type</a></th>
+               <th style="width:auto;"><a href="" class="pink">Discount</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in receiptCtrl.itemDiscounts">
+               <td>{{$index+1}}</td>
+               <td>{{x.name}}</td>
+               <td>{{x.type}}</td>
+               <td>{{x.discount}}%</td>
+            </tr>
+            
+         </table>
+         </div>
+        </div>
+	</div>
+</div>

@@ -28,6 +28,7 @@ import com.sbz.models.Manager;
 import com.sbz.models.Salesman;
 import com.sbz.models.User;
 import com.sbz.services.CategoryService;
+import com.sbz.services.CustomerService;
 import com.sbz.services.UserService;
 
 @RestController
@@ -39,6 +40,9 @@ public class UserController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private CustomerService customerService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDTO) throws IllegalArgumentException, UnsupportedEncodingException {
@@ -53,7 +57,8 @@ public class UserController {
 		Algorithm algorithm = Algorithm.HMAC256("sbz");
 		String token=null;
 		if(user instanceof Customer){
-			token = createToken(algorithm, user, "customer");
+			Customer customer=customerService.findOneByUsername(loginDTO.getUsername());
+			token = createTokenCustomer(algorithm, customer, "customer");
 		}else if(user instanceof Manager){
 			token = createToken(algorithm, user, "manager");
 		}else if(user instanceof Salesman){
@@ -65,6 +70,20 @@ public class UserController {
 		
 	}
 	
+	private String createTokenCustomer(Algorithm algorithm, Customer customer, String role) {
+		String token = JWT.create()
+				.withClaim("username", customer.getUsername())
+		        .withClaim("fname", customer.getFirstName())
+		        .withClaim("lname", customer.getLastName())
+		        .withClaim("registered", customer.getRegistered())
+		        .withClaim("address", customer.getAddress())
+		        .withClaim("points", customer.getPoints())
+		        .withClaim("category", customer.getCategory().getName())
+		        .withClaim("role", role)
+		        .sign(algorithm);
+		return token;
+	}
+
 	private String createToken(Algorithm algorithm, User user, String role) {
 	
 		String token = JWT.create()

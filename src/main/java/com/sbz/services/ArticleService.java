@@ -22,4 +22,13 @@ public class ArticleService {
 		return repository.findOne(id);
 	}
 
+	public List<Article> findAllByOrdered(boolean b) {
+		return repository.findAllByOrdered(true);
+	}
+
+	public void save(Article article) {
+		repository.save(article);
+		
+	}
+
 }

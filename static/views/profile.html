@@ -1,0 +1,45 @@
+<div ng-show="profileCtrl.view">
+	<div class="center_title_bar">Profile</div>
+	<div class="prod_box_big">
+		<div class="center_prod_box_big">
+			<p>Username: {{profileCtrl.userData.username}}</p>
+			<p>First Name: {{profileCtrl.userData.fname}}</p>
+			<p>Last Name: {{profileCtrl.userData.lname}}</p>
+			<p>Registered: {{profileCtrl.date}}</p>
+			<p>Address: {{profileCtrl.userData.address}}</p>
+			<p>Points: {{profileCtrl.userData.points}}</p>
+			<p>Category: {{profileCtrl.userData.category}}</p>
+		</div>
+	</div>
+	
+	<div class="center_title_bar">Receipts</div>
+	<div class="prod_box_big">
+		<div class="center_prod_box_big">
+			<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;;"><a href="" class="pink">No.</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Date</a></th>
+               <th style="width:auto;"><a href="" class="pink">Total Price</a></th>
+               <th style="width:auto;"><a href="" class="pink">Final Price</a></th>
+               <th style="width:auto;"><a href="" class="pink">Earned Points</a></th>
+               <th style="width:auto;"><a href="" class="pink">Spent Points</a></th>
+               <th style="width:auto;"><a href="" class="pink">State</a></th>
+               <th style="width:22px;"><a href="" class="pink">Details</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in profileCtrl.receipts">
+               <td>{{$index+1}}</td>
+               <td>{{profileCtrl.calcDate(x.date)}}</td>
+               <td>{{x.totalPrice}}$</td>
+               <td>{{x.finalPrice}}$</td>
+			   <td>{{x.earnedPoints}}</td>
+               <td>{{x.spentPoints}}</td>
+               <td>{{x.state}}</td>
+               <td><a href="#!/receipt/{{x.id}}"><img src="images/details.png" width="22" height="22" border="0" /></a></td>
+            </tr>
+            
+         </table>
+      </div>
+		</div>
+	</div>
+</div>

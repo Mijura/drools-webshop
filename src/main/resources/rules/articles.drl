@@ -1,0 +1,11 @@
+package rules
+
+import com.sbz.models.Article;
+
+rule "ako je brojno stanje artikla manje od minimalnog postavi naznaku u artiklu"
+	agenda-group "articles"
+	when
+		$a:	Article(count<minCount);
+	then
+		$a.setOrdered(true);
+end

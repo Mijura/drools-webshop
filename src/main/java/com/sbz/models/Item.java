@@ -6,10 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -23,12 +21,7 @@ public class Item {
 	@Column
 	private Integer number;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "receipt")
-	private Receipt receipt;
-	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "article")
+	@ManyToOne
 	private Article article;
 	
 	@Column
@@ -47,7 +40,7 @@ public class Item {
 	private Double finalPrice;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<ItemDiscount> itemDiscounts = new ArrayList<ItemDiscount>();
+	private List<ItemDiscount> itemDiscounts=new ArrayList<ItemDiscount>();
 	
 	public Item(){}
 
@@ -56,6 +49,7 @@ public class Item {
 		this.amount = amount;
 		this.articlePriceOnDay = article.getPrice();
 		this.totalPrice = this.amount * this.articlePriceOnDay;
+
 	}
 
 	public Item(Long id, Integer number, Receipt receipt, Article article, Double articlePriceOnDay, Integer amount,
@@ -63,7 +57,6 @@ public class Item {
 		super();
 		this.id = id;
 		this.number = number;
-		this.receipt = receipt;
 		this.article = article;
 		this.articlePriceOnDay = articlePriceOnDay;
 		this.amount = amount;
@@ -91,14 +84,6 @@ public class Item {
 
 	public void setNumber(Integer number) {
 		this.number = number;
-	}
-
-	public Receipt getReceipt() {
-		return receipt;
-	}
-
-	public void setReceipt(Receipt receipt) {
-		this.receipt = receipt;
 	}
 
 	public Article getArticle() {

@@ -28,6 +28,11 @@
       <script src="controllers/articleCategoriesCtrl.js"></script>
       <script src="controllers/saleCtrl.js"></script>
       <script src="controllers/cartCtrl.js"></script>
+      <script src="controllers/profileCtrl.js"></script>
+      <script src="controllers/receiptCtrl.js"></script>
+      <script src="controllers/dashboardCtrl.js"></script>
+      <script src="controllers/receiptSalesmanCtrl.js"></script>
+      <script src="controllers/stockCtrl.js"></script>
    </head>
    <body ng-app="myApp" ng-controller="indexController as indexCtrl">
       <div id="main_container">
@@ -45,15 +50,18 @@
             <div id="menu_tab">
                <ul class="menu">
                   <li ng-show="!indexCtrl.loggedIn"><a href="#!/register" class="nav">Register</a></li>
-                  <li ng-show="indexCtrl.loggedIn"><a href="#!/profile" class="nav">Profile</a></li>
-                  <li ng-show="indexCtrl.loggedIn" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/customerCategories" class="nav">Customer Categories</a></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/articleCategories" class="nav">Article Categories</a></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='manager'"><a href="#!/sale" class="nav">Sale</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'"><a href="#!/profile" class="nav">Profile</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'" class="divider"></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'"><a href="#!/home" class="nav">Homepage</a></li>
                   <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='customer'" class="divider"></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='salesman'"><a href="#!/dashboard" class="nav">Receipts</a></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='salesman'" class="divider"></li>
+                  <li ng-show="indexCtrl.loggedIn &amp;&amp; indexCtrl.userData.role=='salesman'"><a href="#!/stock" class="nav">Filling the stock</a></li>
                   <li ng-show="indexCtrl.loggedIn"><a href="#!/" ng-click="indexCtrl.logout()" class="nav">Log out</a></li>
                </ul>
             </div>
@@ -94,10 +102,10 @@
             <div class="right_content" ng-show="indexCtrl.loggedIn">
                <div class="shopping_cart" ng-show="indexCtrl.userData.role=='customer'">
                   <div class="title_box">Shopping cart</div>
-                  <div class="cart_details"> {{cart.length}} items <br />
+                  <div class="cart_details"> {{indexCtrl.itemNumber}} items <br />
                      <span class="border_cart"></span> Total: <span class="price">{{indexCtrl.cartPrice}}$</span> 
                   </div>
-                  <div class="cart_icon"><a href="#!/cart" ><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
+                  <div class="cart_icon"><a href="#!/cart"><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a></div>
                </div>
                
                <div class="title_box">Special Products</div>

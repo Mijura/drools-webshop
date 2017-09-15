@@ -1,7 +1,6 @@
 package com.sbz.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.kie.api.runtime.KieContainer;
@@ -23,6 +22,7 @@ import com.sbz.models.Item;
 import com.sbz.models.Receipt;
 import com.sbz.services.ArticleService;
 import com.sbz.services.CustomerService;
+import com.sbz.services.ReceiptService;
 
 @RestController
 @RequestMapping(value = "/api/customer")
@@ -33,12 +33,42 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
-
+	
+	@Autowired
+	private ReceiptService receiptService;
+	
 	@Autowired
 	private KieContainer kieContainer;
 	
+	@RequestMapping(value = "/getReceipts", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<List<Receipt>> getReceipts(@CookieValue("token") String token) {
+		String username;
+		if ( (username = JWTVerify.verifyAndGetUsername(token, "customer"))!=null){
+			Customer c = customerService.findOneByUsername(username);
+			List<Receipt> receipts = receiptService.findByCustomer(c);
+			return new ResponseEntity<List<Receipt>>(receipts, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<List<Receipt>>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/getReceipt", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Receipt> getReceipt(@CookieValue("token") String token, 
+			@RequestBody CartDTO c) {
+	
+		if (JWTVerify.verify(token, "customer")){
+			
+			Receipt receipt = receiptService.findOne(c.getId());
+			return new ResponseEntity<Receipt>(receipt, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Receipt>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	@RequestMapping(value = "/getArticles", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<List<Article>> getCategories(@CookieValue("token") String token) {
+	public ResponseEntity<List<Article>> getArticles(@CookieValue("token") String token) {
 		
 		if (JWTVerify.verify(token, "customer")){
 			List<Article> articles = service.findAllByStatus("ACTIVE");
@@ -55,15 +85,18 @@ public class CustomerController {
 		String username;
 		if ( (username = JWTVerify.verifyAndGetUsername(token, "customer"))!=null){
 			Customer customer = customerService.findOneByUsername(username);
-			
 			Receipt receipt = new Receipt();
 			receipt.setCustomer(customer);
 			List<Item> items = new ArrayList<Item>();
+			double price =0;
 			for(CartDTO x:cart){
 				Article article = service.findOne(x.getId());
-				items.add(new Item(article, x.getAmount()));
+				Item it = new Item(article, x.getAmount());
+				items.add(it);
+				price = price + it.getTotalPrice();
 			}
 			receipt.setItems(items);
+			receipt.setTotalPrice(price);
 			
 			KieSession kieSession = kieContainer.newKieSession("session");
 			kieSession.insert(receipt);
@@ -79,6 +112,21 @@ public class CustomerController {
 			return new ResponseEntity<Receipt>(receipt, HttpStatus.OK);
 		}else{
 			return new ResponseEntity<Receipt>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	@RequestMapping(value = "/createReceipt", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Boolean> createReceipt(@CookieValue("token") String token, 
+			@RequestBody Receipt receipt) {
+		String username;
+		if ((username = JWTVerify.verifyAndGetUsername(token, "customer"))!=null){
+			Customer customer = customerService.findOneByUsername(username);
+			customer.getReceipts().add(receipt);
+			receipt.setCustomer(customer);
+			receiptService.save(receipt);
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}

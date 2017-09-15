@@ -9,5 +9,7 @@ import com.sbz.models.Article;
 public interface ArticleRepository  extends JpaRepository<Article, Long>{
 
 	List<Article> findAllByStatus(String status);
+	
+	List<Article> findAllByOrdered(boolean b);
 
 }

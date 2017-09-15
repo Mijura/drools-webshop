@@ -2,10 +2,9 @@
 	// controller bound to application body, parent controller to all others
 	angular.module("myApp").controller('indexController', indexController);
 	
-	function indexController($scope, $cookies, $window, toastr) {
+	function indexController($rootScope,$scope, $cookies, $window, toastr) {
 		var vm = this;
 		vm.loggedIn = false;
-		$scope.cart = [];
 		
 		isLogged();
 		
@@ -14,27 +13,31 @@
 				vm.loggedIn = true;
 				vm.homepage = '#!/home';
 				vm.userData = $cookies.getObject("userdata");
+				if(vm.userData.role=='customer'){
+					$rootScope.cart = $cookies.getObject("cart");
+				}
 			}
 			
 			
 		}
 		
-		function calcCartPrice(){
+		vm.calcCartPrice = function(){
 			vm.cartPrice=0;
-			$scope.cart.forEach(function(x) {
+			$rootScope.cart.forEach(function(x) {
 				vm.cartPrice = Math.round((vm.cartPrice + x.price*x.amount) * 100) / 100;
 				
 			});
+			vm.itemNumber = $rootScope.cart.length;
 		}
 		
-		vm.addToChart = function(article){
+		vm.addToCart = function(article){
 			if(!article.amount){
 				toastr.error("Enter amount!");
 				return;
 			}
 			
 			var find = false;
-			$scope.cart.forEach(function(x) {
+			angular.forEach($rootScope.cart, function(x) {
 				if(x.id==article.id){
 					x.amount = x.amount + article.amount;
 					find=true;
@@ -42,11 +45,15 @@
 					
 			});
 			
-			if(!find)
-				$scope.cart.push(JSON.parse(JSON.stringify(article)));
+			if(!find){
+				$rootScope.cart = $rootScope.cart || [];
+				$rootScope.cart.push(JSON.parse(JSON.stringify(article)));
+			}
+				
 			
-			calcCartPrice();
+			vm.calcCartPrice();
 			toastr.success("Succesfully added article to chart");
+			$cookies.putObject('cart',$rootScope.cart);
 		}
 		
 		vm.login = function(token){
@@ -58,10 +65,13 @@
 			
 			if(vm.userData.role=="customer"){
 				$window.location = "#!/home";
-				
+				$rootScope.cart = [];
+				$cookies.putObject('cart',$rootScope.cart);
 			}
 			else if(vm.userData.role=='manager')
 				$window.location = "#!/customerCategories";
+			else
+				$window.location = "#!/dashboard";
 		}
 		
 		vm.logout = function() {

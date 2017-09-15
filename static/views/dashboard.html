@@ -1,0 +1,42 @@
+<div ng-show="dashboardCtrl.view">
+	<div class="center_title_bar">Receipts</div>
+	
+	
+	
+	<div class="prod_box_big">
+	<br><br>
+	<select ng-change="dashboardCtrl.ch()" ng-model="dashboardCtrl.m">
+		<option>ON HOLD</option>
+		<option>SUCCESS</option>
+		<option>CANCELED</option>
+	</select>
+		<div class="center_prod_box_big">
+			<div class="table_grid">
+         <table cellspacing="0" cellpadding="0">
+            <tr>
+               <th style="width:22px;;"><a href="" class="pink">No.</a></th>
+			   <th style="width:auto;"><a href="" class="pink">Customer</a></th>
+               <th style="width:auto;"><a href="" class="pink">Total Price</a></th>
+               <th style="width:auto;"><a href="" class="pink">Final Price</a></th>
+               <th style="width:auto;"><a href="" class="pink">Earned Points</a></th>
+               <th style="width:auto;"><a href="" class="pink">Spent Points</a></th>
+               <th style="width:auto;"><a href="" class="pink">State</a></th>
+               <th style="width:22px;"><a href="" class="pink">Process</a></th>
+            </tr>
+            <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="x in dashboardCtrl.receipts|filter:dashboardCtrl.state">
+               <td>{{$index+1}}</td>
+               <td>{{x.customer.username}}</td>
+               <td>{{x.totalPrice}}$</td>
+               <td>{{x.finalPrice}}$</td>
+			   <td>{{x.earnedPoints}}</td>
+               <td>{{x.spentPoints}}</td>
+               <td>{{x.state}}</td>
+               <td ng-show="x.state=='ON HOLD'"><a href="#!/receiptSalesman/{{x.id}}"><img src="images/edit.png" width="22" height="22" border="0" /></a></td>
+               <td ng-show="x.state!='ON HOLD'"></td>
+            </tr>
+            
+         </table>
+      </div>
+		</div>
+	</div>
+</div>

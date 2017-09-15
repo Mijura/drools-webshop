@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -41,8 +40,8 @@ public class Receipt {
 	@Column(nullable = false)
 	private String state;
 	
-	@OneToMany(mappedBy="receipt", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Item> items;
+	@OneToMany(cascade = CascadeType.ALL)
+	List<Item> items;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ReceiptDiscount> discounts=new ArrayList<ReceiptDiscount>();
@@ -50,10 +49,14 @@ public class Receipt {
 	@Column
 	private Integer discount;
 	
-	public Receipt(){}
+	public Receipt(){
+		date = new Date();
+	}
 
-	public Receipt(Long id, Date date, Customer customer, Double totalPrice, Double finalPrice, Integer earnedPoints, Integer spentPoints,
-			String state, List<Item> items, List<ReceiptDiscount> discounts, Integer discount) {
+	
+
+	public Receipt(Long id, Date date, Customer customer, Double totalPrice, Double finalPrice, Integer earnedPoints,
+			Integer spentPoints, String state, List<Item> items, List<ReceiptDiscount> discounts, Integer discount) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -67,6 +70,8 @@ public class Receipt {
 		this.discounts = discounts;
 		this.discount = discount;
 	}
+
+
 
 	public Long getId() {
 		return id;

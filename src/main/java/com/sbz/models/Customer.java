@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -23,7 +24,7 @@ public class Customer extends User {
 	@ManyToOne
 	private Category category;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Receipt> receipts;
 

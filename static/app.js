@@ -37,6 +37,31 @@ angular.module('myApp',
 				controller : "cartController",
 				controllerAs : "cartCtrl"
 			})
+			.when('/profile', {
+				templateUrl : 'views/profile.html',
+				controller : "profileController",
+				controllerAs : "profileCtrl"
+			})
+			.when('/receipt/:id', {
+				templateUrl : 'views/receipt.html',
+				controller : "receiptController",
+				controllerAs : "receiptCtrl"
+			})
+			.when('/receiptSalesman/:id', {
+				templateUrl : 'views/receiptSalesman.html',
+				controller : "receiptSalesmanController",
+				controllerAs : "receiptSalesmanCtrl"
+			})
+			.when('/dashboard', {
+				templateUrl : 'views/dashboard.html',
+				controller : "dashboardController",
+				controllerAs : "dashboardCtrl"
+			})
+			.when('/stock', {
+				templateUrl : 'views/stock.html',
+				controller : "stockController",
+				controllerAs : "stockCtrl"
+			})
 			.otherwise({
 				redirectTo : '/'
 			});
